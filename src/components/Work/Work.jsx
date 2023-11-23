@@ -6,8 +6,8 @@ import Card from "./Card";
 
 const Work = () => {
   return (
-    <section id="work" className="text-center mt-5">
-      <h2 className="mb-4 inline-block text-4xl border-b-4 border-blue-600 font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+    <section id="work" className="text-center p-10">
+      <h2 className=" mb-4 inline-block text-4xl border-b-4 border-blue-600 font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
         My Works
       </h2>
       <br />

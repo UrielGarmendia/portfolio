@@ -16,3 +16,16 @@
     -1px 1px 0 white;
   color: black;
 }
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate {
+  animation: scroll 30s linear infinite;
+}
