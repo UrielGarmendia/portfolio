@@ -2,7 +2,7 @@
 import CV from "../../assets/CV-Uriel-Garmendia.pdf";
 const Home = () => {
   return (
-    <section className="bg-center bg-no-repeat bg-cover bg-[url('https://imgs.search.brave.com/gefZhCLYpdrR5MHh_EOabCRUco4FNRrra6cNBwS2KYM/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMudW5zcGxhc2gu/Y29tL3Bob3RvLTE1/MTg3NzM1NTMzOTgt/NjUwYzE4NGUwYmIz/P2l4bGliPXJiLTQu/MC4zJml4aWQ9TTN3/eE1qQTNmREI4TUh4/elpXRnlZMmg4TVRs/OGZHTnZaR2xuYnlV/eU1HUmxKVEl3Y0hK/dlozSmhiV0ZqYVc5/dWZHVnVmREI4ZkRC/OGZId3cmdz0xMDAw/JnE9ODA')] bg-gray-700 bg-blend-multiply">
+    <section className="bg-center bg-no-repeat bg-cover bg-[url('https://imgs.search.brave.com/gefZhCLYpdrR5MHh_EOabCRUco4FNRrra6cNBwS2KYM/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMudW5zcGxhc2gu/Y29tL3Bob3RvLTE1/MTg3NzM1NTMzOTgt/NjUwYzE4NGUwYmIz/P2l4bGliPXJiLTQu/MC4zJml4aWQ9TTN3/eE1qQTNmREI4TUh4/elpXRnlZMmg4TVRs/OGZHTnZaR2xuYnlV/eU1HUmxKVEl3Y0hK/dlozSmhiV0ZqYVc5/dWZHVnVmREI4ZkRC/OGZId3cmdz0xMDAw/JnE9ODA')] bg-gray-700 bg-blend-multiply h-[45rem]">
       <div className="px-4 text-center mx-auto max-w-screen-xl py-24 lg:py-56">
         <div className="w-4/5 md:w-3/6 xl:w-5/12 m-auto text-left">
           <span className="ml-2 md:ml-1 xl:ml-8 text-sky-400">

@@ -1,4 +1,6 @@
 import "./App.css";
+import AboutMe from "./components/About me/AboutMe";
+import Contact from "./components/Contact/Contact";
 import Home from "./components/Home/Home";
 import NavBar from "./components/Nav/NavBar";
 import Stack from "./components/Stack/Stack";
@@ -11,6 +13,8 @@ function App() {
       <Home />
       <Work />
       <Stack />
+      <AboutMe />
+      <Contact />
     </>
   );
 }
