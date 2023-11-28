@@ -1,8 +1,20 @@
 /* eslint-disable react/no-unescaped-entities */
 import CV from "../../assets/CV-Uriel-Garmendia.pdf";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
+import { SiGithub, SiLinkedin } from "react-icons/si";
+
 const Home = () => {
+  useEffect(() => {
+    AOS.init({ duration: "1500", delay: "5" });
+  }, []);
   return (
-    <section className="bg-center bg-no-repeat bg-cover bg-[url('https://imgs.search.brave.com/gefZhCLYpdrR5MHh_EOabCRUco4FNRrra6cNBwS2KYM/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMudW5zcGxhc2gu/Y29tL3Bob3RvLTE1/MTg3NzM1NTMzOTgt/NjUwYzE4NGUwYmIz/P2l4bGliPXJiLTQu/MC4zJml4aWQ9TTN3/eE1qQTNmREI4TUh4/elpXRnlZMmg4TVRs/OGZHTnZaR2xuYnlV/eU1HUmxKVEl3Y0hK/dlozSmhiV0ZqYVc5/dWZHVnVmREI4ZkRC/OGZId3cmdz0xMDAw/JnE9ODA')] bg-gray-700 bg-blend-multiply h-[45rem]">
+    <section
+      id="home"
+      data-aos="fade-top"
+      className="bg-center bg-no-repeat bg-cover bg-[url('https://imgs.search.brave.com/gefZhCLYpdrR5MHh_EOabCRUco4FNRrra6cNBwS2KYM/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMudW5zcGxhc2gu/Y29tL3Bob3RvLTE1/MTg3NzM1NTMzOTgt/NjUwYzE4NGUwYmIz/P2l4bGliPXJiLTQu/MC4zJml4aWQ9TTN3/eE1qQTNmREI4TUh4/elpXRnlZMmg4TVRs/OGZHTnZaR2xuYnlV/eU1HUmxKVEl3Y0hK/dlozSmhiV0ZqYVc5/dWZHVnVmREI4ZkRC/OGZId3cmdz0xMDAw/JnE9ODA')] bg-gray-700 bg-blend-multiply h-[45rem]"
+    >
       <div className="px-4 text-center mx-auto max-w-screen-xl py-24 lg:py-56">
         <div className="w-4/5 md:w-3/6 xl:w-5/12 m-auto text-left">
           <span className="ml-2 md:ml-1 xl:ml-8 text-sky-400">
@@ -39,10 +51,22 @@ const Home = () => {
             </svg>
           </a>
           <a
-            href="#"
+            href="#about-me"
             className="inline-flex justify-center hover:text-gray-900 items-center py-3 px-5 sm:ms-4 text-base font-medium text-center text-white rounded-lg border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400"
           >
             More about me
+          </a>
+          <a
+            href="https://github.com/UrielGarmendia"
+            className="inline-flex justify-center text-2xl hover:text-gray-900 items-center p-3  sm:ms-4 font-medium text-center text-white rounded-lg sm:rounded-full border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400"
+          >
+            <SiGithub />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/uriel-garmendia/"
+            className="inline-flex justify-center text-2xl hover:text-gray-900 items-center p-3  sm:ms-4 font-medium text-center text-white rounded-lg sm:rounded-full border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400"
+          >
+            <SiLinkedin />
           </a>
         </div>
       </div>

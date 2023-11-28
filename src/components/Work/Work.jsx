@@ -3,10 +3,16 @@ import taskpro from "../../assets/projects-img/taskpro.png";
 import biblioapp from "../../assets/projects-img/biblioapp.png";
 import tusuenio from "../../assets/projects-img/tusuenio.png";
 import Card from "./Card";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 
 const Work = () => {
+  useEffect(() => {
+    AOS.init({ duration: "1500" });
+  }, []);
   return (
-    <section id="work" className="text-center p-10">
+    <section data-aos="fade-top" id="work" className="mb-20 text-center p-10">
       <h2 className=" mb-4 inline-block text-4xl border-b-4 border-blue-600 font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
         My Works
       </h2>
