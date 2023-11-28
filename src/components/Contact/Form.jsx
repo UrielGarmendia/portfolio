@@ -1,12 +1,27 @@
 import emailjs from "@emailjs/browser";
+import { useRef } from "react";
 
 const Form = () => {
+  const refForm = useRef();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const serviceId = "service_a9arreh";
+    const templateId = "template_gg0s43s";
+    const apiKey = "hZM9ZBfTxCN9Yp9r_";
+
+    emailjs
+      .sendForm(serviceId, templateId, refForm.current, apiKey)
+      .then((result) => {
+        console.log(result.text);
+        refForm.current.reset();
+      })
+      .catch((error) => console.error(error));
+  };
+
   return (
-    <form
-      action="https://getform.io/f/af3d9cef-0047-4f8f-a95f-d27895a3866d"
-      method="POST"
-      className="max-w-md mx-auto"
-    >
+    <form ref={refForm} onSubmit={handleSubmit} className="max-w-md mx-auto">
       <div className="relative z-0 w-full mb-5 group">
         <input
           type="text"
@@ -14,7 +29,7 @@ const Form = () => {
           id="name"
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
-          required=""
+          required
         />
         <label
           htmlFor="name"
@@ -30,7 +45,7 @@ const Form = () => {
           id="email"
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
-          required=""
+          required
         />
         <label
           htmlFor="email"
@@ -46,7 +61,7 @@ const Form = () => {
           id="subject"
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
-          required=""
+          required
         />
         <label
           htmlFor="subject"
@@ -64,10 +79,12 @@ const Form = () => {
         </label>
         <textarea
           id="message"
+          name="message"
           rows={4}
           className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Write your message..."
           defaultValue={""}
+          required
         />
       </div>
       <button
