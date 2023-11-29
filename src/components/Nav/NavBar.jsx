@@ -6,7 +6,10 @@ export default function NavBar() {
   const handleDisplay = () => setDisplay(!display);
 
   return (
-    <nav className="border-gray-200 bg-gray-50 dark:bg-zinc-900 ">
+    <nav
+      data-aos="fade-top"
+      className="border-gray-200 bg-gray-50 dark:bg-zinc-900 "
+    >
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
