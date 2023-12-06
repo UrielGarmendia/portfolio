@@ -17,7 +17,7 @@ const Home = () => {
     >
       <div className="px-4 text-center mx-auto max-w-screen-xl py-24 lg:py-56">
         <div className="w-4/5 md:w-3/6 xl:w-5/12 m-auto text-left">
-          <span className="ml-2 md:ml-1 xl:ml-8 text-sky-400">Hi, I'm</span>
+          <span className="ml-2 md:ml-1 xl:ml-8 text-sky-400">Hi 🖐🏼, I'm</span>
           <h1 className="nombre mb-4 text-4xl text-center font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
             Uriel Garmendia
           </h1>
@@ -30,7 +30,7 @@ const Home = () => {
           <a
             href={CV}
             download="CV Uriel Garmendia"
-            className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
+            className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-900"
           >
             Download CV
             <svg

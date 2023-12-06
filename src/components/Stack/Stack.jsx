@@ -21,7 +21,7 @@ const Stack = () => {
   }, []);
   return (
     <section data-aos="fade-top" id="stack" className="text-center mb-20">
-      <h2 className=" mb-4 inline-block text-4xl border-b-4 border-blue-600 font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+      <h2 className=" mb-4 inline-block text-4xl border-b-4 border-blue-600 font-extrabold leading-none tracking-tight  md:text-5xl lg:text-6xl text-white">
         My Stack
       </h2>
       <br />
