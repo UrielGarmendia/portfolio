@@ -81,17 +81,18 @@ export default function NavBar() {
                 href="#home"
                 className="block py-2 px-3 md:p-0  rounded  md:border-0  text-white md:hover:text-blue-500 hover:bg-gray-700 hover:font-extrabold md:hover:bg-transparent"
               >
-                Home
+                Inicio
               </a>
             </li>
             <li>
               <a
-                href="#work"
-                className="block py-2 px-3 md:p-0  rounded md:border-0  text-white md:hover:text-blue-500 hover:bg-gray-700 hover:font-extrabold  md:hover:bg-transparent"
+                href="#about-me"
+                className="block py-2 px-3 md:p-0  rounded md:border-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:font-extrabold  md:hover:bg-transparent"
               >
-                Works
+                Sobre mi
               </a>
             </li>
+
             <li>
               <a
                 href="#stack"
@@ -102,10 +103,10 @@ export default function NavBar() {
             </li>
             <li>
               <a
-                href="#about-me"
-                className="block py-2 px-3 md:p-0  rounded md:border-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:font-extrabold  md:hover:bg-transparent"
+                href="#work"
+                className="block py-2 px-3 md:p-0  rounded md:border-0  text-white md:hover:text-blue-500 hover:bg-gray-700 hover:font-extrabold  md:hover:bg-transparent"
               >
-                About Me
+                Proyectos
               </a>
             </li>
             <li>
@@ -113,7 +114,7 @@ export default function NavBar() {
                 href="#contact"
                 className="block py-2 px-3 md:p-0  rounded  md:border-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:font-extrabold  md:hover:bg-transparent"
               >
-                Contact
+                Contacto
               </a>
             </li>
           </ul>

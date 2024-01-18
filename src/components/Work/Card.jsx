@@ -12,7 +12,7 @@ const Card = ({ image, title, linkDeploy, linkRepo }) => {
             href={linkRepo}
             className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg  focus:ring-4 focus:outline-none bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
           >
-            Repository
+            Repositorio
             <svg
               className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
               aria-hidden="true"

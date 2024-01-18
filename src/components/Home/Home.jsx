@@ -17,14 +17,16 @@ const Home = () => {
     >
       <div className="px-4 text-center mx-auto max-w-screen-xl py-24 lg:py-56">
         <div className="w-4/5 md:w-3/6 xl:w-5/12 m-auto text-left">
-          <span className="ml-2 md:ml-1 xl:ml-8 text-sky-400">Hi 🖐🏼, I'm</span>
+          <span className="ml-2 md:ml-1 xl:ml-8 text-sky-400">
+            Hola 🖐🏼, Soy
+          </span>
           <h1 className="nombre mb-4 text-4xl text-center font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
             Uriel Garmendia
           </h1>
         </div>
         <p className="mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48">
-          I am a full stack web developer with a strong desire to learn and
-          grow.
+          Soy un desarrollador web full stack con un fuerte deseo de aprender y
+          crecer.
         </p>
         <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
           <a
@@ -32,7 +34,7 @@ const Home = () => {
             download="CV Uriel Garmendia"
             className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-900"
           >
-            Download CV
+            Descargar CV
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -52,7 +54,7 @@ const Home = () => {
             href="#about-me"
             className="inline-flex justify-center hover:text-gray-900 items-center py-3 px-5 sm:ms-4 text-base font-medium text-center text-white rounded-lg border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400"
           >
-            More about me
+            Más sobre mi
           </a>
           <a
             href="https://github.com/UrielGarmendia"

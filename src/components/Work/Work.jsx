@@ -14,7 +14,7 @@ const Work = () => {
   return (
     <section data-aos="fade-top" id="work" className="mb-20 text-center p-10">
       <h2 className=" mb-4 inline-block text-4xl border-b-4 border-blue-600 font-extrabold leading-none tracking-tight md:text-5xl lg:text-6xl text-white">
-        My Works
+        Mis Proyectos
       </h2>
       <br />
       <div className="grid xl:grid-cols-3 place-content-center">

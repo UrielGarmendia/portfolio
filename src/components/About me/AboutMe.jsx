@@ -5,27 +5,26 @@ const AboutMe = () => {
     <section
       id="about-me"
       data-aos="fade-top"
-      className="text-center mb-20 mx-6"
+      className="text-center mb-20 mx-6 mt-6"
     >
       <h2 className=" mb-4 inline-block text-4xl border-b-4 border-blue-600 font-extrabold leading-none tracking-tight  md:text-5xl lg:text-6xl text-white">
-        About me
+        Sobre Mi
       </h2>
       <p className="mb-8 mt-4 text-lg font-normal lg:text-xl sm:px-16 lg:px-48 text-left w-full text-gray-300">
-        I am a self-taught person and I am always looking for new ways to learn.
-        I am passionate about web development and I like working on challenging
-        projects. I am a good communicator and I work well in a team. I
-        completed two web development bootcamps, one at Digital House and one at
-        SoyHenry.
+        Me encanta aprender cosas nuevas, y el desarrollo web es una de mis
+        pasiones. Siempre estoy buscando nuevos retos, y me considero una
+        persona comunicativa y que trabaja bien en equipo.
       </p>
       <p className="mb-8 mt-4 text-lg font-normal lg:text-xl sm:px-16 lg:px-48 text-left w-full text-gray-300">
-        At each bootcamp, I developed a complete ecommerce that demonstrated my
-        skills in full stack web development. I have also developed several
-        smaller web projects. However, I am available to conduct interviews and
-        share my code with potential employers.
+        He completado dos bootcamps de desarrollo web, uno en Digital House y
+        otro en SoyHenry. En ambos, desarrollé un ecommerce completo que
+        demostró mis habilidades en desarrollo web full stack. También he
+        desarrollado varios proyectos web más pequeños, y estoy disponible para
+        mostrar mi código a posibles empleadores.
       </p>
       <p className="mb-8 mt-4 text-lg font-normal lg:text-xl sm:px-16 lg:px-48 text-left w-full text-gray-300">
-        My goal is to work as a full stack web developer in a company that
-        allows me to continue learning and growing professionally.
+        Mi objetivo es trabajar como desarrollador web full stack en una empresa
+        que me permita seguir aprendiendo y creciendo profesionalmente.
       </p>
     </section>
   );

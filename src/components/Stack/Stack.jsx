@@ -22,7 +22,7 @@ const Stack = () => {
   return (
     <section data-aos="fade-top" id="stack" className="text-center mb-20">
       <h2 className=" mb-4 inline-block text-4xl border-b-4 border-blue-600 font-extrabold leading-none tracking-tight  md:text-5xl lg:text-6xl text-white">
-        My Stack
+        Mi Stack
       </h2>
       <br />
       <div className="relative mt-5 mb-5 m-auto w-max-screen overflow-hidden before:absolute before:left-0 before:top-0 before:z-[2] before:h-full before:w-[100px] before:content-[''] after:absolute after:right-0 after:top-0 after:z-[2] after:h-full after:w-[100px] after:-scale-x-100 after:content-['']">
