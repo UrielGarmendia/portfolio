@@ -19,12 +19,6 @@ const Work = () => {
       <br />
       <div className="grid xl:grid-cols-3 place-content-center">
         <Card
-          image={ecommerceAutos}
-          title="E-Commerce Autos"
-          linkDeploy={null}
-          linkRepo="https://github.com/JuanBogliacino/e-commerce-autos.git"
-        />
-        <Card
           image={taskpro}
           title="TaskPro"
           linkDeploy="https://task-pro-todo-app.netlify.app/"
