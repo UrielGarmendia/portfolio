@@ -11,20 +11,39 @@ const AboutMe = () => {
         Sobre Mi
       </h2>
       <p className="mb-8 mt-4 text-lg font-normal lg:text-xl sm:px-16 lg:px-48 text-left w-full text-gray-300">
-        Me encanta aprender cosas nuevas, y el desarrollo web es una de mis
-        pasiones. Siempre estoy buscando nuevos retos, y me considero una
-        persona comunicativa y que trabaja bien en equipo.
+        Desarrollador Full Stack apasionado con formación en bootcamps
+        intensivos (Digital House y SoyHenry) y actualmente cursando la
+        Licenciatura en Sistemas en la UADE. Me especializo en crear soluciones
+        web completas, desde el frontend hasta la infraestructura backend.
       </p>
       <p className="mb-8 mt-4 text-lg font-normal lg:text-xl sm:px-16 lg:px-48 text-left w-full text-gray-300">
-        He completado dos bootcamps de desarrollo web, uno en Digital House y
-        otro en SoyHenry. En ambos, desarrollé un ecommerce completo que
-        demostró mis habilidades en desarrollo web full stack. También he
-        desarrollado varios proyectos web más pequeños, y estoy disponible para
-        mostrar mi código a posibles empleadores.
+        Lo que me define:
+        <ul>
+          <li>
+            🧠 Aprendizaje continuo: Siempre explorando nuevas tecnologías y
+            mejores prácticas
+          </li>
+          <li>
+            💡 Enfoque práctico: He desarrollado un e-commerce full stack y
+            múltiples proyectos personales
+          </li>
+          <li>
+            🤝 Trabajo en equipo: Excelentes habilidades comunicativas y
+            experiencia colaborativa
+          </li>
+        </ul>
       </p>
       <p className="mb-8 mt-4 text-lg font-normal lg:text-xl sm:px-16 lg:px-48 text-left w-full text-gray-300">
-        Mi objetivo es trabajar como desarrollador web full stack en una empresa
-        que me permita seguir aprendiendo y creciendo profesionalmente.
+        Tecnologías principales: Frontend: React, JavaScript, HTML5/CSS3
+        Backend: Node.js, Express Bases de datos: MongoDB, PostgreSQL Mi
+        objetivo: Busco oportunidades como Desarrollador Full Stack Junior donde
+        pueda aplicar mis conocimientos mientras sigo creciendo profesionalmente
+        en un entorno colaborativo. <br />
+        <br />
+        <b className="refran">
+          Creo que el código bien escrito puede transformar ideas en realidades
+          impactantes. Cada proyecto es una nueva oportunidad para superarme.
+        </b>
       </p>
     </section>
   );

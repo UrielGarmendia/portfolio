@@ -16,3 +16,11 @@
     -1px 1px 0 white;
   color: black;
 }
+
+li {
+  list-style-type: none;
+}
+
+.refran {
+  font-family: "Courier New", monospace;
+}

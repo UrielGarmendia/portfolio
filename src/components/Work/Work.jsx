@@ -1,4 +1,4 @@
-import ecommerceAutos from "../../assets/projects-img/e-commerce-autos.png";
+import planner from "../../assets/projects-img/planner.png";
 import taskpro from "../../assets/projects-img/taskpro.png";
 import biblioapp from "../../assets/projects-img/biblioapp.png";
 import tusuenio from "../../assets/projects-img/tusuenio.png";
@@ -35,6 +35,12 @@ const Work = () => {
           title="Tu Sueño"
           linkDeploy="https://tu-suenio-front.vercel.app/"
           linkRepo="https://github.com/stars/UrielGarmendia/lists/tu-sue%C3%B1o"
+        />
+        <Card
+          image={planner}
+          title="Planner"
+          linkDeploy="https://mi-planner.netlify.app/"
+          linkRepo="https://github.com/UrielGarmendia/proyecto-de-gestion-testing.git"
         />
       </div>
     </section>

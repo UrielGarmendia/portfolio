@@ -11,6 +11,7 @@ import react from "../../assets/languages-images/react.png";
 import redux from "../../assets/languages-images/redux.png";
 import sequelize from "../../assets/languages-images/sequelize.webp";
 import tailwind from "../../assets/languages-images/tailwind.svg";
+import python from "../../assets/languages-images/python.png";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
@@ -39,6 +40,7 @@ const Stack = () => {
           <CardStack image={postgresql} title="PostgreSQL" />
           <CardStack image={bootstrap} title="Bootstrap" />
           <CardStack image={tailwind} title="Tailwind" />
+          <CardStack image={python} title="Tailwind" />
 
           <CardStack image={html} title="HTML" />
           <CardStack image={css} title="CSS" />
