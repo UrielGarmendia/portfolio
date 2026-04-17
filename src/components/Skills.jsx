@@ -18,14 +18,12 @@ export default function Skills() {
   return (
     <section id="skills" ref={ref} className="py-24 px-6 relative flex justify-center">
       <div className="max-w-6xl w-full">
-        {/* Software Window Wrapper */}
         <div className="bg-[#121212] rounded-3xl shadow-neu-out border border-white/5 flex flex-col overflow-hidden relative">
           
-          {/* Header */}
           <div className="border-b-2 border-[#181818] bg-gradient-to-r from-[#1b1b1b] to-[#121212] px-6 py-4 flex justify-between items-center select-none z-20">
              <div className="flex items-center gap-4">
                 <span className="font-mono text-[10px] font-bold tracking-[0.2em] uppercase text-gray-300 drop-shadow-[0_1px_1px_rgba(0,0,0,1)]">
-                   [ Stack_Tecnológico ]
+                    [ Stack Tecnológico ]
                 </span>
              </div>
              <div className="flex gap-1.5 opacity-80">
@@ -37,7 +35,6 @@ export default function Skills() {
 
           <div className="p-6 lg:p-12 relative flex flex-col gap-12">
             
-            {/* Top Carousel */}
             <motion.div
                initial={{ opacity: 0, y: -20 }}
                animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -58,7 +55,6 @@ export default function Skills() {
                 </div>
             </motion.div>
 
-            {/* Bottom Categories Grid */}
             <motion.div
                initial={{ opacity: 0, y: 30 }}
                animate={inView ? { opacity: 1, y: 0 } : {}}

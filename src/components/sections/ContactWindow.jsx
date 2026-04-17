@@ -1,7 +1,3 @@
-/**
- * ContactWindow.jsx
- * Restaurado a su estilo original oscuro Neumorphic con EmailJS
- */
 import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
@@ -14,7 +10,7 @@ const PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
 const ContactWindow = ({ constraintsRef }) => {
   const formRef    = useRef(null);
-  const [status, setStatus] = useState('idle'); // idle | sending | sent | error
+  const [status, setStatus] = useState('idle');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,10 +51,8 @@ const ContactWindow = ({ constraintsRef }) => {
       height="650px"
     >
       <div className="relative bg-[#121212] w-full h-full rounded-2xl shadow-neu-out border border-white/5 p-8 flex flex-col min-h-[500px]">
-        {/* Blueprint SVG Background Overlay */}
         <div className="absolute inset-0 bg-blueprint-engine bg-no-repeat bg-[bottom_left_-4rem] opacity-[0.02] pointer-events-none rounded-2xl" />
 
-        {/* Header of Terminal */}
         <div className="border-b-2 border-[#181818] pb-4 mb-8 flex justify-between items-end relative z-10">
            <div>
               <h3 className="font-display font-bold text-xl uppercase tracking-widest text-[#dcdcdc] m-0">CONTACTO</h3>
@@ -73,7 +67,6 @@ const ContactWindow = ({ constraintsRef }) => {
 
         <form ref={formRef} onSubmit={handleSubmit} className="space-y-6 relative z-10 flex-1 flex flex-col">
            
-           {/* Name Field */}
            <div className="flex flex-col">
               <label className="font-mono text-[10px] font-bold uppercase tracking-widest mb-2 text-industrial-400">Nombre</label>
               <div className="bg-[#0a0a0a] rounded-xl shadow-neu-in border border-black p-1">
@@ -85,7 +78,6 @@ const ContactWindow = ({ constraintsRef }) => {
               </div>
            </div>
            
-           {/* Email Field */}
            <div className="flex flex-col">
               <label className="font-mono text-[10px] font-bold uppercase tracking-widest mb-2 text-industrial-400">Email</label>
               <div className="bg-[#0a0a0a] rounded-xl shadow-neu-in border border-black p-1">
@@ -97,7 +89,6 @@ const ContactWindow = ({ constraintsRef }) => {
               </div>
            </div>
 
-           {/* Message Field */}
            <div className="flex flex-col flex-1">
               <label className="font-mono text-[10px] font-bold uppercase tracking-widest mb-2 text-industrial-400">Mensaje</label>
               <div className="bg-[#0a0a0a] rounded-xl shadow-neu-in border border-black p-1 h-32 flex-1">
@@ -110,7 +101,6 @@ const ContactWindow = ({ constraintsRef }) => {
            </div>
 
            <div className="pt-4 relative flex justify-end">
-             {/* Idle / Sending Button */}
              {(status === 'idle' || status === 'sending') && (
                <button
                  type="submit"
@@ -128,7 +118,6 @@ const ContactWindow = ({ constraintsRef }) => {
                </button>
              )}
 
-             {/* Success Feedback */}
              {status === 'sent' && (
                <motion.div
                  initial={{ opacity: 0, x: 20 }}
@@ -140,7 +129,6 @@ const ContactWindow = ({ constraintsRef }) => {
                </motion.div>
              )}
 
-             {/* Error Feedback */}
              {status === 'error' && (
                <motion.div
                  initial={{ opacity: 0, x: 20 }}

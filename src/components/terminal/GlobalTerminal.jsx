@@ -1,48 +1,12 @@
-/**
- * GlobalTerminal.jsx
- * ─────────────────────────────────────────────────────────────────────────────
- * Terminal de comandos onda Cyber-Tech industrial.
- *
- * Arquitectura: Patrón de Registro de Comandos
- * ──────────────────────────────────────
- * Che, los comandos los armé como objetos adentro de un Map<string, CommandDef>.
- * Cada comando tiene su propio `execute` y su metadata. Así la lógica del parser
- * queda separada del renderizado, y puedo agregar comandos nuevos al toque sin 
- * tener que armar un switch gigante. Queda re prolijo.
- *
- * Layout:
- *  DOCKED  — Píldora chiquita abajo de todo. Siempre visible.
- *  EXPANDED — Se abre el panel gigante con todo el historial.
- *
- * Atajos de teclado (están en useKeyboardShortcuts):
- *  Ctrl + K   → abre/cierra la terminal
- *  Escape     → la minimiza
- *  ↑ / ↓      → navegás por el historial (igual que en una terminal posta)
- * ─────────────────────────────────────────────────────────────────────────────
- */
-
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import useSystemStore, { WINDOW_IDS } from '../../store/useSystemStore';
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// § 1 — COMMAND REGISTRY
-//       Each entry: { description, usage, aliases?, execute(args) }
-//       `args` → string[] of tokens after the base command
-//
-// FIX: buildCommandRegistry ya no recibe argumentos. Cada execute() lee del 
-// store de Zustand en el momento justo. 
-// Es la forma correcta de hacerlo: cero subscripciones, cero re-renders innecesarios,
-// estado siempre fresco. Un golazo de performance.
-// ═══════════════════════════════════════════════════════════════════════════════
-
 const buildCommandRegistry = () => {
-  // Alias de comodidad — lee el store sincrónicamente, sin suscribirse
   const gs = () => useSystemStore.getState();
 
   const registry = new Map();
 
-  // ── help ──────────────────────────────────────────────────────────────────
   registry.set('help', {
     description: 'Lista todos los comandos disponibles',
     usage:       'help',
@@ -57,7 +21,6 @@ const buildCommandRegistry = () => {
     },
   });
 
-  // ── open ──────────────────────────────────────────────────────────────────
   registry.set('open', {
     description: 'Abrir una ventana   →  open about | open stack | open projects',
     usage:       'open <window>',
@@ -84,7 +47,6 @@ const buildCommandRegistry = () => {
     },
   });
 
-  // ── ls ────────────────────────────────────────────────────────────────────
   registry.set('ls', {
     description: 'Listar ventanas listas para abrir',
     usage:       'ls [proyectos]',
@@ -105,7 +67,6 @@ const buildCommandRegistry = () => {
     },
   });
 
-  // ── filter ────────────────────────────────────────────────────────────────
   registry.set('filter', {
     description: 'Filtrar proyectos por tecnología  →  filter --react | filter --clear',
     usage:       'filter --<tech> | filter --clear',
@@ -131,8 +92,6 @@ const buildCommandRegistry = () => {
     },
   });
 
-  // ── sudo debug ────────────────────────────────────────────────────────────
-  // El parser lo agarra como "sudo" + args 
   registry.set('sudo', {
     description: 'Comandos de chapa alta  →  sudo debug',
     usage:       'sudo <command>',
@@ -158,19 +117,16 @@ const buildCommandRegistry = () => {
     },
   });
 
-  // ── rm -rf / ──────────────────────────────────────────────────────────────
   registry.set('rm', {
     description: 'Reventar los datos del sistema  →  rm -rf /',
     usage:       'rm -rf /',
     execute: (args) => {
       const fullArgs = args.join(' ');
       if (fullArgs === '-rf /') {
-        // Borramos el storage local y cerramos todo a la mierda
         localStorage.clear();
         for (const id of Object.values(WINDOW_IDS)) gs().closeWindow(id);
         gs().pushToHistory({ type: 'error', text: '  [FATAL] Sistema destruido. Reiniciando...' });
         
-        // Efecto glitch opcional
         document.body.classList.add('glitch-load');
         setTimeout(() => document.body.classList.remove('glitch-load'), 1000);
 
@@ -181,7 +137,6 @@ const buildCommandRegistry = () => {
     },
   });
 
-  // ── download cv ───────────────────────────────────────────────────────────
   registry.set('download', {
     description: 'Bajar mi Currículum  →  download cv',
     usage:       'download cv',
@@ -216,7 +171,6 @@ const buildCommandRegistry = () => {
     },
   });
 
-  // ── clear ─────────────────────────────────────────────────────────────────
   registry.set('clear', {
     description: 'Limpiar historial de la terminal',
     usage:       'clear',
@@ -226,7 +180,6 @@ const buildCommandRegistry = () => {
     },
   });
 
-  // ── close ─────────────────────────────────────────────────────────────────
   registry.set('close', {
     description: 'Cerrar una ventana por nombre',
     usage:       'close <window>',
@@ -252,52 +205,26 @@ const buildCommandRegistry = () => {
   return registry;
 };
 
-
-// ═══════════════════════════════════════════════════════════════════════════════
-// § 2 — PARSER DE COMANDOS
-//       Función pura: (rawInput, registry) → FeedbackResult
-//       Pilla los alias antes de ejecutar. Cero efectos secundarios —
-//       la magia ocurre dentro del `execute` que muta el store de Zustand.
-// ═══════════════════════════════════════════════════════════════════════════════
-
-/**
- * parse(rawInput, registry)
- * ─────────────────────────
- * Tokenizes input, resolves aliases, looks up the CommandDef, and invokes
- * its execute handler with the remaining args.
- *
- * @param   {string}          rawInput  - Raw user input string
- * @param   {Map}             registry  - The command registry
- * @returns {FeedbackResult}            - { status, message }
- */
 const parse = (rawInput, registry) => {
   const tokens     = rawInput.trim().toLowerCase().split(/\s+/).filter(Boolean);
   if (!tokens.length) return { status: 'warn', message: '' };
 
   const [baseCmd, ...args] = tokens;
 
-  // Direct lookup
   if (registry.has(baseCmd)) {
     return registry.get(baseCmd).execute(args);
   }
 
-  // Alias resolution — scan all commands for alias match
   for (const [, def] of registry.entries()) {
     if (def.aliases?.includes(baseCmd)) {
       return def.execute(args);
     }
   }
 
-  // Not found
   return { status: 'error', message: `Command not found: '${baseCmd}'. Type 'help'.` };
 };
 
-
-// ═══════════════════════════════════════════════════════════════════════════════
-// § 3 — ANIMATION VARIANTS
-// ═══════════════════════════════════════════════════════════════════════════════
-
-const panelVariants = {
+ const panelVariants = {
   collapsed: {
     height:  '44px',
     opacity:  1,
@@ -319,82 +246,59 @@ const historyVariants = {
   },
 };
 
-
-// ═══════════════════════════════════════════════════════════════════════════════
-// § 4 — COMPONENT
-// ═══════════════════════════════════════════════════════════════════════════════
-
 const GlobalTerminal = () => {
-  // ── Store bindings ─────────────────────────────────────────────────────────
   const isTerminalOpen  = useSystemStore((s) => s.isTerminalOpen);
   const terminalHistory = useSystemStore((s) => s.terminalHistory);
   const toggleTerminal  = useSystemStore((s) => s.toggleTerminal);
   const closeTerminal   = useSystemStore((s) => s.closeTerminal);
   const pushToHistory   = useSystemStore((s) => s.pushToHistory);
 
-  // ── Local state ────────────────────────────────────────────────────────────
   const [inputValue,   setInputValue]   = useState('');
-  const [feedback,     setFeedback]     = useState(null); // { status, message }
-  // Shell history for ↑/↓ navigation (separate from store terminalHistory)
+  const [feedback,     setFeedback]     = useState(null); 
   const [shellHistory, setShellHistory] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [savedInput,   setSavedInput]   = useState('');
 
-  // ── Refs ───────────────────────────────────────────────────────────────────
   const inputRef      = useRef(null);
   const historyEndRef = useRef(null);
   const registryRef   = useRef(null);
 
-  // ── Build registry ONCE on mount ──────────────────────────────────────────
-  // FIX: buildCommandRegistry() receives NO props. It uses getState() internally.
-  // This eliminates the object-literal selector that caused the infinite loop.
   useEffect(() => {
     registryRef.current = buildCommandRegistry();
-  }, []); // [] is correct — registry has no external dependencies
-
-  // ── Auto-focus input when terminal opens ───────────────────────────────────
+  }, []); 
   useEffect(() => {
     if (isTerminalOpen) {
       setTimeout(() => inputRef.current?.focus(), 50);
     }
   }, [isTerminalOpen]);
 
-  // ── Auto-scroll history to bottom ─────────────────────────────────────────
   useEffect(() => {
     historyEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [terminalHistory]);
 
-  // ── Clear feedback after 2s ────────────────────────────────────────────────
   useEffect(() => {
     if (!feedback) return;
     const timer = setTimeout(() => setFeedback(null), 2000);
     return () => clearTimeout(timer);
   }, [feedback]);
 
-  // ── Command execution handler ──────────────────────────────────────────────
   const handleExecute = useCallback(() => {
     const raw = inputValue.trim();
     if (!raw) return;
 
-    // Echo to history
     pushToHistory({ type: 'command', text: `$ ${raw}` });
 
-    // Update shell history for ↑/↓ navigation
     setShellHistory((prev) => [raw, ...prev].slice(0, 50));
     setHistoryIndex(-1);
     setSavedInput('');
 
-    // Parse & execute
     const result = parse(raw, registryRef.current);
 
-    // Set feedback badge
     if (result.message) setFeedback(result);
 
-    // Clear input
     setInputValue('');
   }, [inputValue, pushToHistory]);
 
-  // ── Keyboard handler ───────────────────────────────────────────────────────
   const handleKeyDown = useCallback((e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -407,18 +311,16 @@ const GlobalTerminal = () => {
       return;
     }
 
-    // ↑ — navigate to older command
     if (e.key === 'ArrowUp') {
       e.preventDefault();
       if (!shellHistory.length) return;
       const nextIndex = Math.min(historyIndex + 1, shellHistory.length - 1);
-      if (historyIndex === -1) setSavedInput(inputValue); // save current
+      if (historyIndex === -1) setSavedInput(inputValue); 
       setHistoryIndex(nextIndex);
       setInputValue(shellHistory[nextIndex]);
       return;
     }
 
-    // ↓ — navigate to newer command
     if (e.key === 'ArrowDown') {
       e.preventDefault();
       if (historyIndex <= 0) {
@@ -432,18 +334,12 @@ const GlobalTerminal = () => {
       return;
     }
 
-    // Ctrl+K — toggle terminal (also handled by global hook, but here for safety)
     if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
       e.preventDefault();
       toggleTerminal();
     }
   }, [handleExecute, closeTerminal, toggleTerminal, shellHistory,
       historyIndex, inputValue, savedInput]);
-
-
-  // ─────────────────────────────────────────────────────────────────────────
-  // RENDER
-  // ─────────────────────────────────────────────────────────────────────────
 
   return (
     <motion.div
@@ -463,7 +359,6 @@ const GlobalTerminal = () => {
       }}
     >
 
-      {/* ══ PANEL HEADER ══════════════════════════════════════════════════════ */}
       <div
         onClick={() => toggleTerminal()}
         style={{
@@ -480,9 +375,7 @@ const GlobalTerminal = () => {
           flexShrink:     0,
         }}
       >
-        {/* Left: icon + label */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          {/* Pulsing indicator */}
           <motion.div
             animate={{ opacity: [1, 0.2, 1] }}
             transition={{ repeat: Infinity, duration: 2.4, ease: 'easeInOut' }}
@@ -502,7 +395,6 @@ const GlobalTerminal = () => {
           </span>
         </div>
 
-        {/* Right: feedback badge + shortcut hint + toggle */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <AnimatePresence>
             {feedback && (
@@ -525,7 +417,7 @@ const GlobalTerminal = () => {
           </AnimatePresence>
 
           <span style={{ fontSize: '9px', color: '#2e2e2e', letterSpacing: '0.1em' }}>
-            CTRL+`
+            CTRL + K
           </span>
 
           <motion.span
@@ -538,7 +430,6 @@ const GlobalTerminal = () => {
         </div>
       </div>
 
-      {/* ══ OUTPUT HISTORY ════════════════════════════════════════════════════ */}
       <AnimatePresence>
         {isTerminalOpen && (
           <motion.div
@@ -555,7 +446,6 @@ const GlobalTerminal = () => {
               scrollbarColor:  '#FF007F22 transparent',
             }}
             className="window-scrollbar"
-            // Stop propagation so clicking text doesn't propagate to panel header
             onClick={(e) => e.stopPropagation()}
           >
             {terminalHistory.map((entry, i) => (
@@ -566,7 +456,6 @@ const GlobalTerminal = () => {
         )}
       </AnimatePresence>
 
-      {/* ══ INPUT ROW ═════════════════════════════════════════════════════════ */}
       <div
         onClick={(e) => {
           e.stopPropagation();
@@ -584,7 +473,6 @@ const GlobalTerminal = () => {
           flexShrink:   0,
         }}
       >
-        {/* Prompt prefix */}
         <span
           style={{
             fontSize:      '12px',
@@ -597,7 +485,6 @@ const GlobalTerminal = () => {
           uriel@sys:~$
         </span>
 
-        {/* Input */}
         <input
           ref={inputRef}
           type="text"
@@ -623,7 +510,6 @@ const GlobalTerminal = () => {
             fontSize:      '13px',
             letterSpacing: '0.03em',
             caretColor:    '#FF007F',
-            // Subtle neon underline instead of a box border
             borderBottom:  '1px solid rgba(255,0,127,0.0)',
             paddingBottom:  '2px',
             transition:    'border-color 0.15s ease',
@@ -637,7 +523,6 @@ const GlobalTerminal = () => {
           }}
         />
 
-        {/* Enter hint */}
         {isTerminalOpen && inputValue &&  (
           <motion.button
             initial={{ opacity: 0, scale: 0.8 }}
@@ -664,12 +549,6 @@ const GlobalTerminal = () => {
     </motion.div>
   );
 };
-
-
-// ═══════════════════════════════════════════════════════════════════════════════
-// § 5 — RENDERIZADO DEL HISTORIAL
-//       Acá pinto línea por línea todo lo que escupe la terminal con sus colorcitos.
-// ═══════════════════════════════════════════════════════════════════════════════
 
 const LINE_STYLES = {
   command: { color: '#F3F4F6',     prefix: ''   },

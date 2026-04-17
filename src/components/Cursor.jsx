@@ -18,7 +18,6 @@ export default function Cursor() {
     };
     
     const handleMouseOver = (e) => {
-      // Elements that trigger the hover state (grow cursor)
       const isClickable = e.target.closest('a') || e.target.closest('button') || e.target.closest('input') || e.target.closest('textarea') || e.target.closest('.cursor-pointer');
       setIsHovering(!!isClickable);
     };
@@ -36,7 +35,6 @@ export default function Cursor() {
 
   return (
     <>
-      {/* Outer smooth trailing ring */}
       <motion.div
         className="fixed top-0 left-0 w-8 h-8 border border-white rounded-full pointer-events-none z-[9999] mix-blend-difference flex items-center justify-center"
         animate={{
@@ -48,7 +46,6 @@ export default function Cursor() {
         }}
         transition={{ type: 'spring', stiffness: 200, damping: 20, mass: 0.2 }}
       />
-      {/* Inner ultra-fast dot */}
       <motion.div
         className="fixed top-0 left-0 w-2 h-2 bg-white rounded-full pointer-events-none z-[9999] mix-blend-difference"
         animate={{

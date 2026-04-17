@@ -1,11 +1,3 @@
-/**
- * projects.js — Datos canónicos de proyectos
- * ─────────────────────────────────────────────────────────────────────────────
- * Todos los imageUrl apuntan a /public/ (Vite los sirve como rutas absolutas).
- * El campo `architecture` alimenta la cara trasera del ProjectCard (flip 3D).
- * ─────────────────────────────────────────────────────────────────────────────
- */
-
 export const projectsData = [
   {
     id:    'mi-planner',

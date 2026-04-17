@@ -1,9 +1,3 @@
-/**
- * DesktopGrid.jsx
- * ─────────────────────────────────────────────────────────────────────────────
- * El fondo del OS + modo inspector.
- */
-
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence, useMotionValue, useMotionTemplate } from 'framer-motion';
 import useSystemStore from '../../store/useSystemStore';
@@ -15,7 +9,6 @@ const DesktopGrid = () => {
   const isDebugActive = useSystemStore((s) => s.isDebugActive);
   const mousePosition = useSystemStore((s) => s.mousePosition);
 
-  // inspector del dom - desactivado en celu para evitar conflictos
   const defaultInspected = useElementInspector();
   const inspected = isMobileDevice ? null : defaultInspected;
 
@@ -40,7 +33,6 @@ const DesktopGrid = () => {
     return () => window.removeEventListener('mousemove', handleMove);
   }, [mouseX, mouseY]);
 
-  // funciones del modo inspector en celus (APIs del celu/PC y tiempo que lleva prendido)
   const [uptime, setUptime] = useState(0);
   const [batteryLevel, setBatteryLevel] = useState('N/A');
   const [netType, setNetType] = useState('N/A');
@@ -85,7 +77,6 @@ const DesktopGrid = () => {
 
   return (
     <>
-      {/* el brillo que sigue el mouse */}
       {!isMobileDevice && (
         <motion.div
           style={{
@@ -98,14 +89,12 @@ const DesktopGrid = () => {
         />
       )}
 
-      {/* el escaner del DOM */}
       <AnimatePresence>
         {isDebugActive && inspected && (
           <ElementScannerOverlay key="scanner" inspected={inspected} />
         )}
       </AnimatePresence>
 
-      {/* el panel del modo debug */}
       <AnimatePresence>
         {isDebugActive && (
           <motion.div
@@ -187,24 +176,15 @@ const DesktopGrid = () => {
   );
 };
 
-
-// ═══════════════════════════════════════════════════════════════════════════════
-// ElementScannerOverlay
-// The visual box that appears over the currently inspected DOM element.
-// CRITICAL: pointer-events MUST be 'none' on this entire component tree.
-// ═══════════════════════════════════════════════════════════════════════════════
-
 const ElementScannerOverlay = ({ inspected }) => {
   const { tag, id, rect } = inspected;
 
-  // Build a short label for the badge
   const badgeLabel = [
     `<${tag}>`,
     id ? `#${id}` : '',
     `${Math.round(rect.width)} × ${Math.round(rect.height)}`,
   ].filter(Boolean).join('  |  ');
 
-  // Prevent scanner from rendering if rect is degenerate
   if (rect.width < 4 || rect.height < 4) return null;
 
   return (
@@ -215,35 +195,24 @@ const ElementScannerOverlay = ({ inspected }) => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.08 }}
       style={{
-        // Position exactly over the inspected element
         position:      'fixed',
         top:            rect.top,
         left:           rect.left,
         width:          rect.width,
         height:         rect.height,
-
-        // Visual style: neon dashed scanner box
         border:        '1px dashed #FF007F',
         background:    'rgba(255, 0, 127, 0.055)',
         boxSizing:     'border-box',
-
-        // CRITICAL: lets mouse events pass through to the element beneath
         pointerEvents: 'none',
-
-        // Above everything except the HUD
         zIndex:         9400,
-
-        // Corner bracket accents
         outline:        'none',
       }}
     >
-      {/* ── Corner brackets — top-left ─────────────────────────────────── */}
       <Corner position="tl" />
       <Corner position="tr" />
       <Corner position="bl" />
       <Corner position="br" />
 
-      {/* ── Badge — element tag + dimensions ──────────────────────────── */}
       <div
         style={{
           position:      'absolute',
@@ -265,7 +234,6 @@ const ElementScannerOverlay = ({ inspected }) => {
         {badgeLabel}
       </div>
 
-      {/* ── Size ruler — right edge ────────────────────────────────────── */}
       {rect.height > 30 && (
         <div
           style={{
@@ -289,10 +257,6 @@ const ElementScannerOverlay = ({ inspected }) => {
   );
 };
 
-
-// ── Corner bracket accent ─────────────────────────────────────────────────────
-// Renders a 6×6px L-shaped corner accent at the specified corner.
-
 const CORNER_STYLES = {
   tl: { top:    0, left:  0, borderTop:    '2px solid #FF007F', borderLeft:  '2px solid #FF007F' },
   tr: { top:    0, right: 0, borderTop:    '2px solid #FF007F', borderRight: '2px solid #FF007F' },
@@ -312,8 +276,6 @@ const Corner = ({ position }) => (
   />
 );
 
-
-// ── Utility sub-components ────────────────────────────────────────────────────
 
 const SectionLabel = ({ text }) => (
   <div style={{

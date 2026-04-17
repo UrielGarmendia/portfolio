@@ -24,22 +24,18 @@ const Projects = forwardRef((props, ref) => {
   return (
     <section id="projects" ref={ref} className="py-12 md:py-20 px-6 relative w-full flex flex-col items-center">
       
-      {/* Section Title */}
       <div className="mb-8 text-center w-full max-w-4xl">
          <h2 className="font-display font-bold text-4xl md:text-5xl text-white tracking-widest mb-4 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">Proyectos</h2>
          <div className="w-24 h-1 bg-software-blue mx-auto rounded-full shadow-[0_0_10px_rgba(59,130,246,0.6)]" />
       </div>
 
-      {/* Neumorphic Split View Container */}
       <div className="max-w-4xl w-full flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
         
-        {/* Left Sidebar Menu (El menú chiquito) */}
         <div className="w-full lg:w-[300px] flex flex-col p-5 md:p-5 rounded-[2rem] bg-[#18181a] shadow-[12px_12px_24px_#0d0d0f,-12px_-12px_24px_#232325] border border-white/5 shrink-0">
            <h3 className="text-zinc-500 text-xs font-mono tracking-widest uppercase mb-6 px-2 flex items-center gap-2">
              <LayoutGrid size={14} /> Explorador
            </h3>
            
-           {/* Menú de Botones de Proyectos */}
            <div className="flex flex-col gap-4 flex-1">
               {currentSidebarProjects.map(project => {
                  const isActive = activeProjectId === project.id;
@@ -62,7 +58,6 @@ const Projects = forwardRef((props, ref) => {
               })}
            </div>
 
-           {/* Sidebar Pagination */}
            {totalPages > 1 && (
              <div className="flex items-center justify-between mt-8 pt-6 border-t border-white/5">
                 <button 
@@ -73,7 +68,6 @@ const Projects = forwardRef((props, ref) => {
                   <ChevronLeft size={16} />
                 </button>
                 
-                {/* Page Indicators */}
                 <div className="flex gap-2">
                   {Array.from({ length: totalPages }).map((_, i) => (
                     <div key={i} className={`w-1.5 h-1.5 rounded-full ${currentPage === i + 1 ? 'bg-software-blue shadow-[0_0_8px_#3b82f6]' : 'bg-zinc-700'}`} />
@@ -91,7 +85,6 @@ const Projects = forwardRef((props, ref) => {
            )}
         </div>
 
-        {/* Right Content Area (Detalle del Proyecto Seleccionado) */}
         <div className="flex-1 w-full min-w-0">
            <AnimatePresence mode="wait">
              <motion.div
@@ -102,7 +95,6 @@ const Projects = forwardRef((props, ref) => {
                transition={{ duration: 0.4 }}
                className="flex flex-col p-5 md:p-6 rounded-[2rem] bg-[#1a1a1c] shadow-[12px_12px_24px_#0d0d0f,-12px_-12px_24px_#232325] border border-white/5 w-full"
              >
-                {/* Header Image Viewport */}
                 <div className="w-full h-48 md:h-56 rounded-2xl overflow-hidden relative shadow-[inset_0_4px_20px_rgba(0,0,0,0.4)] mb-6 border border-white/5">
                    <img 
                       src={activeProject.imageUrl}
@@ -111,7 +103,6 @@ const Projects = forwardRef((props, ref) => {
                    />
                 </div>
                 
-                {/* Text Content */}
                 <div className="flex flex-col">
                   
                   <div className="flex items-center gap-3 mb-2">
@@ -129,7 +120,6 @@ const Projects = forwardRef((props, ref) => {
                     )}
                   </div>
                   
-                  {/* Tech Stack Neumorphic Chips */}
                   <div className="flex flex-wrap gap-2 mb-8">
                     {activeProject.techStack.map(tech => (
                        <span key={tech} className="px-4 py-2 text-[10px] md:text-xs font-mono text-zinc-300 bg-[#161618] rounded-xl shadow-[inset_3px_3px_6px_#0a0a0b,_inset_-3px_-3px_6px_#222225] border border-white/5">
@@ -138,7 +128,6 @@ const Projects = forwardRef((props, ref) => {
                     ))}
                   </div>
 
-                  {/* Neumorphic Extruded Buttons */}
                   <div className="flex flex-wrap gap-3 mt-auto">
                     {activeProject.inRedesign ? (
                       <div className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-xl bg-[#1e1e20] text-amber-500/80 text-[13px] font-semibold opacity-80 select-none border border-dashed border-amber-500/20 shadow-[inset_4px_4px_8px_#0c0c0e,_inset_-4px_-4px_8px_#303032]">

@@ -1,18 +1,6 @@
-/**
- * useSystemStore.js
- * ─────────────────────────────────────────────────────────
- * Manejador del estado global de todo el OS usando Zustand.
- * Qué pilla esto:
- *  - El registro de ventanas (cuál está abierta, minimizada, apilamiento z-index)
- *  - El Modo Debug de Ingeniería (la cajita inspectora y el grid)
- *  - El estado de la Terminal (el historial de comandos, filtros activos)
- * ─────────────────────────────────────────────────────────
- */
-
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
-// ── Window IDs ──────────────────────────────────────────────
 export const WINDOW_IDS = {
   ABOUT:    'about',
   STACK:    'stack',
@@ -20,7 +8,6 @@ export const WINDOW_IDS = {
   CONTACT:  'contact',
 };
 
-// ── Window default configs ──────────────────────────────────
 const DEFAULT_WINDOWS = {
   [WINDOW_IDS.ABOUT]: {
     id:         WINDOW_IDS.ABOUT,
@@ -60,7 +47,6 @@ const DEFAULT_WINDOWS = {
   },
 };
 
-// ── Z-index counter ─────────────────────────────────────────
 let zCounter = 20;
 
 const getNextZ = () => {
@@ -68,26 +54,17 @@ const getNextZ = () => {
   return zCounter;
 };
 
-// ── Store ───────────────────────────────────────────────────
 const useSystemStore = create(
   devtools(
     persist(
       (set, get) => ({
 
-        // ══ HYDRATION ══════════════════════════════════════════
         _hasHydrated: false,
         setHasHydrated: (state) => set({ _hasHydrated: state }, false, 'setHasHydrated'),
 
-        // ══ SISTEMA DE VENTANAS ════════════════════════════════════
 
-        /** Registro de todas las ventanas por su WINDOW_ID */
         windows: { ...DEFAULT_WINDOWS },
 
-      /**
-       * openWindow(id)
-       * Abre la ventana si está cerrada, la desminimiza si hace falta,
-       * y la manda al tope del z-index para que tape al resto.
-       */
       openWindow: (id) => {
         set((state) => ({
           windows: {
@@ -102,10 +79,6 @@ const useSystemStore = create(
         }), false, `openWindow/${id}`);
       },
 
-      /**
-       * closeWindow(id)
-       * Oculta la ventana del DOM (pasa isOpen a false).
-       */
       closeWindow: (id) => {
         set((state) => ({
           windows: {
@@ -119,11 +92,6 @@ const useSystemStore = create(
         }), false, `closeWindow/${id}`);
       },
 
-      /**
-       * minimizeWindow(id)
-       * La deja viviendo en la memoria pero oculta en pantalla.
-       * Aparece apagadita en el dock o barra de tareas.
-       */
       minimizeWindow: (id) => {
         set((state) => ({
           windows: {
@@ -136,11 +104,6 @@ const useSystemStore = create(
         }), false, `minimizeWindow/${id}`);
       },
 
-      /**
-       * focusWindow(id)
-       * Brings a window to the top of the z-index stack without
-       * changing its open/minimized state.
-       */
       focusWindow: (id) => {
         set((state) => ({
           windows: {
@@ -153,18 +116,8 @@ const useSystemStore = create(
         }), false, `focusWindow/${id}`);
       },
 
-      // ══ DEBUG MODE ════════════════════════════════════════
-
-      /**
-       * isDebugActive — Engineering Debug Mode
-       * When true:
-       *  - Renders coordinate grid that tracks mouse position
-       *  - Reveals dashed-border overlays on all components
-       *  - Shows live prop tooltips on interactive elements
-       */
       isDebugActive: false,
 
-      /** Mouse position tracked when debug mode is active */
       mousePosition: { x: 0, y: 0 },
 
       toggleDebugMode: () => {
@@ -177,21 +130,16 @@ const useSystemStore = create(
         set({ mousePosition: { x, y } }, false, 'setMousePosition');
       },
 
-      // ══ TERMINAL ══════════════════════════════════════════
 
-      /** Whether the terminal overlay is visible */
       isTerminalOpen: false,
 
-      /** Typed history of commands entered by the user */
       terminalHistory: [
         { type: 'system', text: 'URIEL_OS v2.0 — Industrial Cyber-Tech Shell' },
         { type: 'system', text: 'Type `help` for available commands.' },
       ],
 
-      /** Active technology filter for project cards (null = show all) */
       activeFilter: null,
 
-      /** Last executed command string */
       lastCommand: null,
 
       openTerminal: () => set({ isTerminalOpen: true  }, false, 'openTerminal'),
@@ -201,12 +149,6 @@ const useSystemStore = create(
         false,
         'toggleTerminal'
       ),
-
-      /**
-       * pushToHistory(entry)
-       * Appends an entry to the terminal output log.
-       * Entry shape: { type: 'command'|'output'|'error'|'system', text: string }
-       */
       pushToHistory: (entry) => {
         set((state) => ({
           terminalHistory: [...state.terminalHistory, entry],
@@ -229,23 +171,6 @@ const useSystemStore = create(
         set({ activeFilter: null }, false, 'clearFilter');
       },
 
-      // ══ COMMAND PARSER ════════════════════════════════════
-
-      /**
-       * executeCommand(rawInput)
-       * Parses a raw string from the terminal input and
-       * dispatches the appropriate state mutations + side-effects.
-       *
-       * Supported commands:
-       *  ls                     → list all windows
-       *  ls proyectos           → open projects window
-       *  open <window>          → open a specific window
-       *  filter --<tech>        → filter project cards by tech
-       *  filter --clear         → remove active filter
-       *  sudo debug             → toggle debug mode
-       *  clear                  → clear terminal history
-       *  help                   → list available commands
-       */
       executeCommand: (rawInput) => {
         const { pushToHistory, openWindow, toggleDebugMode,
                 setActiveFilter, clearFilter, clearHistory,
@@ -255,12 +180,10 @@ const useSystemStore = create(
         const parts = input.split(/\s+/);
         const [cmd, ...args] = parts;
 
-        // Echo the command
         pushToHistory({ type: 'command', text: `$ ${rawInput.trim()}` });
 
         set({ lastCommand: input });
 
-        // ── ls ───────────────────────────────────────────
         if (cmd === 'ls') {
           if (!args.length || args[0] === '-a') {
             pushToHistory({
@@ -278,7 +201,6 @@ const useSystemStore = create(
           }
         }
 
-        // ── open ─────────────────────────────────────────
         if (cmd === 'open') {
           const target = args[0];
           const match = Object.values(WINDOW_IDS).find(
@@ -293,9 +215,8 @@ const useSystemStore = create(
           return;
         }
 
-        // ── filter ───────────────────────────────────────
         if (cmd === 'filter') {
-          const flag = args[0]; // e.g. "--react"
+          const flag = args[0];
           if (!flag) {
             pushToHistory({ type: 'error', text: '  Usage: filter --<tech> | filter --clear' });
             return;
@@ -313,7 +234,6 @@ const useSystemStore = create(
           return;
         }
 
-        // ── sudo debug ───────────────────────────────────
         if (cmd === 'sudo' && args[0] === 'debug') {
           const next = !get().isDebugActive;
           toggleDebugMode();
@@ -326,13 +246,10 @@ const useSystemStore = create(
           return;
         }
 
-        // ── clear ────────────────────────────────────────
         if (cmd === 'clear') {
           clearHistory();
           return;
         }
-
-        // ── help ─────────────────────────────────────────
         if (cmd === 'help') {
           pushToHistory({
             type: 'output',
@@ -352,7 +269,6 @@ const useSystemStore = create(
           return;
         }
 
-        // ── Unknown ──────────────────────────────────────
         pushToHistory({
           type: 'error',
           text: `  Command not found: '${cmd}'. Try 'help'.`,

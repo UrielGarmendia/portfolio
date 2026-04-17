@@ -11,7 +11,7 @@ export default function Contact() {
   const formRef    = useRef(null);
   const inView     = useInView(sectionRef, { once: true, margin: '-80px' });
 
-  const [status, setStatus] = useState('idle'); // idle | sending | sent | error
+  const [status, setStatus] = useState('idle');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -48,17 +48,14 @@ export default function Contact() {
       
       <div className="max-w-2xl w-full">
 
-        {/* Neumorphic Terminal Container */}
         <motion.div
            initial={{ opacity: 0, y: 50 }}
            animate={inView ? { opacity: 1, y: 0 } : {}}
            transition={{ duration: 0.8 }}
            className="relative bg-[#121212] w-full min-h-[500px] rounded-3xl shadow-neu-out border border-white/5 p-8 md:p-12 flex flex-col"
         >
-          {/* Blueprint SVG Background Overlay */}
           <div className="absolute inset-0 bg-blueprint-engine bg-no-repeat bg-[bottom_left_-4rem] opacity-[0.02] pointer-events-none rounded-3xl" />
 
-          {/* Header of Terminal */}
           <div className="border-b-2 border-[#181818] pb-4 mb-8 flex justify-between items-end relative z-10">
              <div>
                 <h3 className="font-display font-bold text-lg md:text-2xl uppercase tracking-widest text-white m-0">CONTACTO</h3>
@@ -73,7 +70,6 @@ export default function Contact() {
 
           <form ref={formRef} onSubmit={handleSubmit} className="space-y-8 relative z-10 flex-1 flex flex-col">
              
-             {/* Name Field */}
              <div className="flex flex-col">
                 <label className="font-mono text-[10px] font-bold uppercase tracking-widest mb-3 text-industrial-400">Nombre</label>
                 <div className="bg-[#0a0a0a] rounded-xl shadow-neu-in border border-black p-1">
@@ -85,7 +81,6 @@ export default function Contact() {
                 </div>
              </div>
              
-             {/* Email Field */}
              <div className="flex flex-col">
                 <label className="font-mono text-[10px] font-bold uppercase tracking-widest mb-3 text-industrial-400">Email</label>
                 <div className="bg-[#0a0a0a] rounded-xl shadow-neu-in border border-black p-1">
@@ -97,7 +92,6 @@ export default function Contact() {
                 </div>
              </div>
 
-             {/* Message Field */}
              <div className="flex flex-col flex-1">
                 <label className="font-mono text-[10px] font-bold uppercase tracking-widest mb-3 text-industrial-400">Mensaje</label>
                 <div className="bg-[#0a0a0a] rounded-xl shadow-neu-in border border-black p-1 h-32">
@@ -111,7 +105,6 @@ export default function Contact() {
 
              <div className="pt-6 relative flex justify-end">
 
-               {/* Idle / Sending Button */}
                {(status === 'idle' || status === 'sending') && (
                  <button
                    type="submit"
@@ -129,7 +122,6 @@ export default function Contact() {
                  </button>
                )}
 
-               {/* Success Feedback */}
                {status === 'sent' && (
                  <motion.div
                    initial={{ opacity: 0, x: 20 }}
@@ -141,7 +133,6 @@ export default function Contact() {
                  </motion.div>
                )}
 
-               {/* Error Feedback */}
                {status === 'error' && (
                  <motion.div
                    initial={{ opacity: 0, x: 20 }}

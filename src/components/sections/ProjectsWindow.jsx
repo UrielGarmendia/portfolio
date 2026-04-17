@@ -1,7 +1,3 @@
-/**
- * ProjectsWindow.jsx
- * Restaurada al layout Neumorphic dividido (lista a la izq, detalle a la der)
- */
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink, Github, LayoutGrid, Wrench } from 'lucide-react';
@@ -24,7 +20,6 @@ const ProjectsWindow = ({ constraintsRef }) => {
     >
       <div className="flex flex-col md:flex-row gap-6 items-stretch h-full w-full bg-[#121212] p-4 font-sans text-white">
         
-        {/* Left Sidebar Menu */}
         <div className="w-[260px] flex flex-col p-5 rounded-3xl bg-[#18181a] shadow-neu-out border border-white/5 shrink-0 overflow-y-auto hidden-scrollbar">
            <h3 className="text-zinc-500 text-[10px] font-mono tracking-widest uppercase mb-6 flex items-center gap-2">
              <LayoutGrid size={14} /> Explorador
@@ -53,7 +48,6 @@ const ProjectsWindow = ({ constraintsRef }) => {
            </div>
         </div>
 
-        {/* Right Content Area */}
         <div className="flex-1 min-w-0 relative h-full">
            <AnimatePresence mode="wait">
              <motion.div
@@ -64,7 +58,6 @@ const ProjectsWindow = ({ constraintsRef }) => {
                transition={{ duration: 0.3 }}
                className="flex flex-col p-6 rounded-3xl bg-[#1a1a1c] shadow-neu-out border border-white/5 h-full overflow-y-auto hidden-scrollbar"
              >
-                {/* Header Image Viewport */}
                 <div className="w-full h-[180px] rounded-2xl overflow-hidden relative shadow-[inset_0_4px_20px_rgba(0,0,0,0.4)] mb-6 border border-white/5 shrink-0">
                    <img 
                       src={activeProject.imageUrl}
@@ -74,7 +67,6 @@ const ProjectsWindow = ({ constraintsRef }) => {
                    />
                 </div>
                 
-                {/* Text Content */}
                 <div className="flex flex-col flex-1">
                   <div className="flex items-center gap-3 mb-2">
                     <span className="text-software-blue text-[9px] font-mono tracking-widest uppercase">{activeProject.role}</span>
@@ -91,7 +83,6 @@ const ProjectsWindow = ({ constraintsRef }) => {
                     )}
                   </div>
                   
-                  {/* Tech Stack Neumorphic Chips */}
                   <div className="flex flex-wrap gap-2 mb-8 mt-auto">
                     {activeProject.techStack.map(tech => (
                        <span key={tech} className="px-3 py-1.5 text-[9px] font-mono text-zinc-300 bg-[#161618] rounded-xl shadow-neu-in border border-white/5">
@@ -100,7 +91,6 @@ const ProjectsWindow = ({ constraintsRef }) => {
                     ))}
                   </div>
 
-                  {/* Neumorphic Extruded Buttons */}
                   <div className="flex flex-wrap gap-3 mt-auto">
                     {activeProject.inRedesign ? (
                       <div className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl bg-[#18181a] text-amber-500/80 text-[11px] font-semibold opacity-80 select-none border border-dashed border-amber-500/20">

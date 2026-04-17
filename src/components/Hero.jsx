@@ -29,7 +29,6 @@ export default function Hero() {
           variants={plateVariants} 
           className="w-full bg-[#121212] p-8 md:p-12 lg:p-20 shadow-neu-out rounded-3xl relative flex flex-col items-center border border-white/5"
         >
-          {/* Title */}
           <h1 className="font-display font-bold text-4xl md:text-6xl lg:text-8xl tracking-widest uppercase m-0 p-0 text-stamped select-none relative z-10 mt-6 text-center">
             URIEL GARMENDIA
           </h1>
@@ -43,7 +42,6 @@ export default function Hero() {
           </p>
         </motion.div>
 
-        {/* Neumorphic Action Panel */}
         <motion.div variants={plateVariants} className="mt-12 flex flex-wrap gap-8 justify-center">
           <a
             href="#projects"

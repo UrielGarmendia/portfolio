@@ -1,13 +1,3 @@
-/**
- * useDebugOverlay.js
- * ─────────────────────────────────────────────────────────
- * Tracks mouse position globally when Engineering Debug Mode
- * is active and writes it to the Zustand store.
- * Components read `mousePosition` from the store to render
- * the dynamic coordinate grid.
- * ─────────────────────────────────────────────────────────
- */
-
 import { useEffect } from 'react';
 import useSystemStore from '../store/useSystemStore';
 

@@ -1,12 +1,8 @@
-/**
- * StackWindow.jsx — Tech Stack
- * Restaurado a su estética Dark Neumorphic
- */
 import DraggableWindow from '../os/DraggableWindow';
 import { WINDOW_IDS } from '../../store/useSystemStore';
 import { Monitor, Cpu, Database, Blocks, CircleDashed } from 'lucide-react';
 
-const skillsData = [
+const skillsData = [  
   { category: 'Lenguajes', icon: <Cpu size={16} />, items: ['HTML', 'CSS', 'JavaScript', 'Python'], color: '#0078D7' },
   { category: 'Frameworks', icon: <Blocks size={16} />, items: ['React', 'Redux', 'Bootstrap', 'Tailwind', 'EJS', 'Express.js', 'Node.js'], color: '#388E3C' },
   { category: 'Bases de Datos', icon: <Database size={16} />, items: ['MySQL', 'PostgreSQL'], color: '#D3B58D' },
@@ -28,7 +24,6 @@ const StackWindow = ({ constraintsRef }) => {
     >
       <div className="bg-[#121212] p-6 lg:p-8 relative flex flex-col gap-10 min-h-full rounded-2xl shadow-neu-out border border-[#222]">
         
-        {/* Top Carousel */}
         <div className="w-full bg-[#050505] border border-black shadow-[inset_0_2px_4px_rgba(0,0,0,0.9)] rounded-2xl py-5 overflow-hidden relative">
             <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[#050505] to-transparent z-10 pointer-events-none" />
             <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[#050505] to-transparent z-10 pointer-events-none" />
@@ -44,7 +39,6 @@ const StackWindow = ({ constraintsRef }) => {
             </div>
         </div>
 
-        {/* Bottom Categories Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
            {skillsData.map((mod) => (
              <div key={mod.category} className="bg-[#1A1A1C] p-5 rounded-2xl shadow-neu-out border border-[#222] font-mono select-none hover:border-[#333] transition-colors">
