@@ -1,0 +1,161 @@
+/**
+ * ContactWindow.jsx
+ * Restaurado a su estilo original oscuro Neumorphic con EmailJS
+ */
+import { useRef, useState } from 'react';
+import { motion } from 'framer-motion';
+import emailjs from '@emailjs/browser';
+import DraggableWindow from '../os/DraggableWindow';
+import { WINDOW_IDS } from '../../store/useSystemStore';
+
+const SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+const ContactWindow = ({ constraintsRef }) => {
+  const formRef    = useRef(null);
+  const [status, setStatus] = useState('idle'); // idle | sending | sent | error
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('sending');
+
+    try {
+      const formData = new FormData(formRef.current);
+      const templateParams = {
+        from_name: formData.get('from_name'),
+        name: formData.get('from_name'),
+        reply_to: formData.get('reply_to'),
+        message: formData.get('message'),
+        time: new Date().toLocaleString()
+      };
+
+      await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+      setStatus('sent');
+      setTimeout(() => {
+        setStatus('idle');
+        formRef.current.reset();
+      }, 4000);
+    } catch (err) {
+      console.error('EmailJS error:', err);
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 4000);
+    }
+  };
+
+  const isBusy = status === 'sending' || status === 'sent';
+
+  return (
+    <DraggableWindow
+      id={WINDOW_IDS.CONTACT}
+      title="contact_form.exe"
+      constraintsRef={constraintsRef}
+      defaultPosition={{ x: 300, y: 120 }}
+      width="600px"
+      height="650px"
+    >
+      <div className="relative bg-[#121212] w-full h-full rounded-2xl shadow-neu-out border border-white/5 p-8 flex flex-col min-h-[500px]">
+        {/* Blueprint SVG Background Overlay */}
+        <div className="absolute inset-0 bg-blueprint-engine bg-no-repeat bg-[bottom_left_-4rem] opacity-[0.02] pointer-events-none rounded-2xl" />
+
+        {/* Header of Terminal */}
+        <div className="border-b-2 border-[#181818] pb-4 mb-8 flex justify-between items-end relative z-10">
+           <div>
+              <h3 className="font-display font-bold text-xl uppercase tracking-widest text-[#dcdcdc] m-0">CONTACTO</h3>
+              <span className="font-mono text-[10px] font-bold tracking-widest uppercase text-software-blue">Escribime y hablemos!</span>
+           </div>
+           <div className="flex gap-2">
+              <div className="w-3 h-3 rounded-full bg-mechanic-red shadow-[0_0_8px_#D32F2F] mix-blend-screen" />
+              <div className="w-3 h-3 rounded-full bg-mechanic-amber shadow-[0_0_8px_#F57C00] mix-blend-screen" />
+              <div className="w-3 h-3 rounded-full bg-[#388E3C] shadow-[0_0_8px_#388E3C] mix-blend-screen" />
+           </div>
+        </div>
+
+        <form ref={formRef} onSubmit={handleSubmit} className="space-y-6 relative z-10 flex-1 flex flex-col">
+           
+           {/* Name Field */}
+           <div className="flex flex-col">
+              <label className="font-mono text-[10px] font-bold uppercase tracking-widest mb-2 text-industrial-400">Nombre</label>
+              <div className="bg-[#0a0a0a] rounded-xl shadow-neu-in border border-black p-1">
+                <input 
+                  type="text" name="from_name" required disabled={isBusy}
+                  className="w-full bg-transparent outline-none p-3 font-mono text-sm text-gray-200 placeholder:text-gray-700 disabled:opacity-50"
+                  placeholder="Ej. Juan Pérez / Empresa"
+                />
+              </div>
+           </div>
+           
+           {/* Email Field */}
+           <div className="flex flex-col">
+              <label className="font-mono text-[10px] font-bold uppercase tracking-widest mb-2 text-industrial-400">Email</label>
+              <div className="bg-[#0a0a0a] rounded-xl shadow-neu-in border border-black p-1">
+                <input 
+                  type="email" name="reply_to" required disabled={isBusy}
+                  className="w-full bg-transparent outline-none p-3 font-mono text-sm text-gray-200 placeholder:text-gray-700 disabled:opacity-50"
+                  placeholder="contacto@dominio.com"
+                />
+              </div>
+           </div>
+
+           {/* Message Field */}
+           <div className="flex flex-col flex-1">
+              <label className="font-mono text-[10px] font-bold uppercase tracking-widest mb-2 text-industrial-400">Mensaje</label>
+              <div className="bg-[#0a0a0a] rounded-xl shadow-neu-in border border-black p-1 h-32 flex-1">
+                <textarea 
+                  name="message" required disabled={isBusy}
+                  className="w-full h-full bg-transparent outline-none p-3 font-mono text-sm text-gray-200 placeholder:text-gray-700 resize-none disabled:opacity-50"
+                  placeholder="Describe un proyecto o saludo..."
+                />
+              </div>
+           </div>
+
+           <div className="pt-4 relative flex justify-end">
+             {/* Idle / Sending Button */}
+             {(status === 'idle' || status === 'sending') && (
+               <button
+                 type="submit"
+                 disabled={status === 'sending'}
+                 className="group relative flex items-center justify-center p-3 px-6 font-sans font-bold text-[10px] uppercase tracking-[0.3em] rounded-xl transition-all duration-300 bg-brushed-metal shadow-neu-out active:shadow-neu-in text-white border border-white/10 select-none hover:brightness-110 disabled:opacity-60 disabled:cursor-not-allowed"
+               >
+                 {status === 'sending' ? (
+                   <span className="flex items-center gap-2">
+                     <span className="w-2 h-2 rounded-full bg-software-blue animate-ping" />
+                     Enviando...
+                   </span>
+                 ) : (
+                   'Enviar mensaje'
+                 )}
+               </button>
+             )}
+
+             {/* Success Feedback */}
+             {status === 'sent' && (
+               <motion.div
+                 initial={{ opacity: 0, x: 20 }}
+                 animate={{ opacity: 1, x: 0 }}
+                 className="px-6 py-3 font-mono font-bold text-xs uppercase tracking-widest text-software-blue/90 border border-software-blue/50 bg-software-blue/5 rounded-xl flex items-center gap-3 backdrop-blur-sm shadow-neu-in"
+               >
+                  <div className="w-2 h-2 rounded-full bg-software-blue animate-pulse" />
+                  Enviado con éxito
+               </motion.div>
+             )}
+
+             {/* Error Feedback */}
+             {status === 'error' && (
+               <motion.div
+                 initial={{ opacity: 0, x: 20 }}
+                 animate={{ opacity: 1, x: 0 }}
+                 className="px-6 py-3 font-mono font-bold text-xs uppercase tracking-widest text-mechanic-red/90 border border-mechanic-red/50 bg-mechanic-red/5 rounded-xl flex items-center gap-3 backdrop-blur-sm shadow-neu-in"
+               >
+                  <div className="w-2 h-2 rounded-full bg-mechanic-red animate-pulse" />
+                  Fallo — Reintentar
+               </motion.div>
+             )}
+           </div>
+        </form>
+      </div>
+    </DraggableWindow>
+  );
+};
+
+export default ContactWindow;
