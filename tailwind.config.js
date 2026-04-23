@@ -20,7 +20,7 @@ export default {
           100: '#e5e5e5', // Whitish glare
         },
         software: {
-          blue: '#0078D7',     // WinOLS selection blue
+          blue: '#5BADFF',     // Accessible blue — 7.5:1 contrast on #18181a (WCAG AA ✓)
           panel: '#2D2D30',    // Studio dark panel
           border: '#3E3E42',   // Studio border
         },
@@ -52,8 +52,6 @@ export default {
       backgroundImage: {
         'brushed-metal': 'repeating-linear-gradient(90deg, transparent, transparent 1px, rgba(255,255,255,0.02) 1px, rgba(255,255,255,0.02) 2px), linear-gradient(135deg, #1f1f1f 0%, #121212 100%)',
         'brushed-aluminum': 'repeating-linear-gradient(90deg, transparent, transparent 1px, rgba(0,0,0,0.02) 1px, rgba(0,0,0,0.02) 2px), linear-gradient(135deg, #cccccc 0%, #999999 100%)',
-        'blueprint-engine': "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDBweCIgaGVpZ2h0PSI0MDBweCIgdmlld0JveD0iMCAwIDQwMCA0MDAiPjxnIHN0cm9rZT0iIzIyMiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSI+PHBhdGggZD0iTTUwIDEwMCBMMzUwIDEwMCBNMjAwIDUwIEwyMDAgMzUwIiBzdHJva2UtZGFzaGFycmF5PSI0IDQiLz48Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMDAiIHI9IjEwMCIvPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iODAiLz48cGF0aCBkPSJNMjAwIDEyMCBMMjAwIDI4MCBNMTIwIDIwMCBMMjgwIDIwMCIvPjwvZz48L3N2Zz4=')",
-        'blueprint-150cc': "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDBweCIgaGVpZ2h0PSI0MDBweCIgdmlld0JveD0iMCAwIDQwMCA0MDAiPjxnIHN0cm9rZT0iIzIyMiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSI+PHBhdGggZD0iTTUwIDE1MCBMMzUwIDE1MCBNMjAwIDUwIEwyMDAgMzUwIiBzdHJva2UtZGFzaGFycmF5PSI0IDQiLz48Y2lyY2xlIGN4PSIyMDAiIGN5PSIyNTAiIHI9IjYwIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMjUwIiByPSIyMCIvPjxyZWN0IHg9IjE3MCIgeT0iMTAwIiB3aWR0aD0iNjAiIGhlaWdodD0iOTAiLz48cGF0aCBkPSJNMTcwIDEwMCBMMjAwIDUwIEwyMzAgMTAwIi8+PHBhdGggZD0iTTE5NSAxOTAgTDE5NSAyMTAgTTIwNSAxOTAgTDIwNSAyMTAiLz48L2c+PC9zdmc+')",
       }
     },
   },

@@ -54,7 +54,8 @@ export default function Contact() {
            transition={{ duration: 0.8 }}
            className="relative bg-[#121212] w-full min-h-[500px] rounded-3xl shadow-neu-out border border-white/5 p-8 md:p-12 flex flex-col"
         >
-          <div className="absolute inset-0 bg-blueprint-engine bg-no-repeat bg-[bottom_left_-4rem] opacity-[0.02] pointer-events-none rounded-3xl" />
+          {/* Decorativo: efecto de profundidad suave, sin data-URL problemática */}
+          <div className="absolute inset-0 rounded-3xl pointer-events-none" style={{ background: 'radial-gradient(ellipse at bottom left, rgba(0,120,255,0.04) 0%, transparent 60%)' }} />
 
           <div className="border-b-2 border-[#181818] pb-4 mb-8 flex justify-between items-end relative z-10">
              <div>

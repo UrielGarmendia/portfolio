@@ -69,9 +69,12 @@ export default function App() {
     <>
       <GlobalHooks />
       <Cursor />
-      <DesktopGrid />
-      <BaseLanding />
-      <OSDesktop desktopRef={desktopRef} />
+      {/* main: punto de referencia principal — requerido por WCAG 2.4.1 */}
+      <main id="main-content" style={{ display: 'contents' }}>
+        <DesktopGrid />
+        <BaseLanding />
+        <OSDesktop desktopRef={desktopRef} />
+      </main>
       <Taskbar />
       <GlobalTerminal />
       <SystemToast />
