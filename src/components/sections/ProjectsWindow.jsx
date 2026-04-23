@@ -39,7 +39,7 @@ const ProjectsWindow = ({ constraintsRef }) => {
                      }`}
                    >
                       <span className="font-bold text-[13px] truncate w-full">{project.title}</span>
-                      <span className={`text-[9px] font-mono tracking-wider ${isActive ? "text-software-blue/70" : "text-zinc-600"}`}>
+                      <span className={`text-[9px] font-mono tracking-wider ${isActive ? "text-software-blue" : "text-zinc-400"}`}>
                         {project.techStack.slice(0, 2).join(' • ')}
                       </span>
                    </button>

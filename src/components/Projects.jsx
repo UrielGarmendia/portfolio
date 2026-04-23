@@ -50,7 +50,7 @@ const Projects = forwardRef((props, ref) => {
                      }`}
                    >
                       <span className="font-bold text-[15px] truncate w-full">{project.title.split('//')[0]}</span>
-                      <span className={`text-[10px] font-mono tracking-wider ${isActive ? "text-software-blue/70" : "text-zinc-600"}`}>
+                      <span className={`text-[10px] font-mono tracking-wider ${isActive ? "text-software-blue" : "text-zinc-400"}`}>
                         {project.techStack.slice(0, 2).join(' • ')}
                       </span>
                    </button>
@@ -63,9 +63,10 @@ const Projects = forwardRef((props, ref) => {
                 <button 
                   onClick={() => handlePageChange(currentPage - 1)} 
                   disabled={currentPage === 1}
+                  aria-label="Página anterior de proyectos"
                   className="p-3 rounded-xl bg-[#18181a] shadow-[4px_4px_8px_#0d0d0f,-4px_-4px_8px_#232325] hover:shadow-[inset_2px_2px_4px_#0d0d0f,_inset_-2px_-2px_4px_#232325] text-zinc-300 disabled:opacity-30 disabled:shadow-none disabled:bg-transparent transition-all duration-300"
                 >
-                  <ChevronLeft size={16} />
+                  <ChevronLeft size={16} aria-hidden="true" />
                 </button>
                 
                 <div className="flex gap-2">
@@ -77,9 +78,10 @@ const Projects = forwardRef((props, ref) => {
                 <button 
                   onClick={() => handlePageChange(currentPage + 1)} 
                   disabled={currentPage === totalPages}
+                  aria-label="Página siguiente de proyectos"
                   className="p-3 rounded-xl bg-[#18181a] shadow-[4px_4px_8px_#0d0d0f,-4px_-4px_8px_#232325] hover:shadow-[inset_2px_2px_4px_#0d0d0f,_inset_-2px_-2px_4px_#232325] text-zinc-300 disabled:opacity-30 disabled:shadow-none disabled:bg-transparent transition-all duration-300"
                 >
-                  <ChevronRight size={16} />
+                  <ChevronRight size={16} aria-hidden="true" />
                 </button>
              </div>
            )}

@@ -6,14 +6,18 @@ export default function Hero() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true });
 
+  // LCP FIX: el contenedor arranca visible (opacity:1) para que el h1
+  // sea pintado en el primer frame. Solo animamos posición, no opacidad del h1.
   const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.2 } }
+    hidden:  { opacity: 1 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0 } }
   };
 
+  // El panel se desliza desde abajo — pero empieza con opacity:1
+  // para que el texto sea visible aunque Framer no haya cargado aún.
   const plateVariants = {
-    hidden: { opacity: 0, y: 50, rotateX: 20 },
-    visible: { opacity: 1, y: 0, rotateX: 0, transition: { type: 'spring', damping: 20, stiffness: 100 } }
+    hidden:  { opacity: 1, y: 24 },
+    visible: { opacity: 1, y: 0, transition: { type: 'spring', damping: 22, stiffness: 120 } }
   };
 
   return (
@@ -25,10 +29,11 @@ export default function Hero() {
         animate={inView ? 'visible' : 'hidden'}
         style={{ perspective: 1000 }}
       >
-        <motion.div 
-          variants={plateVariants} 
+        <motion.div
+          variants={plateVariants}
           className="w-full bg-[#121212] p-8 md:p-12 lg:p-20 shadow-neu-out rounded-3xl relative flex flex-col items-center border border-white/5"
         >
+          {/* LCP element — visible desde el primer paint, sin opacity:0 */}
           <h1 className="font-display font-bold text-4xl md:text-6xl lg:text-8xl tracking-widest uppercase m-0 p-0 text-stamped select-none relative z-10 mt-6 text-center">
             URIEL GARMENDIA
           </h1>
@@ -45,6 +50,7 @@ export default function Hero() {
         <motion.div variants={plateVariants} className="mt-12 flex flex-wrap gap-8 justify-center">
           <a
             href="#projects"
+            aria-label="Ir a la sección de proyectos"
             onClick={(e) => {
               e.preventDefault();
               document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
