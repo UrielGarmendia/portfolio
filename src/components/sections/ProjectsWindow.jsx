@@ -21,7 +21,7 @@ const ProjectsWindow = ({ constraintsRef }) => {
       <div className="flex flex-col md:flex-row gap-6 items-stretch h-full w-full bg-[#121212] p-4 font-sans text-white">
         
         <div className="w-[260px] flex flex-col p-5 rounded-3xl bg-[#18181a] shadow-neu-out border border-white/5 shrink-0 overflow-y-auto hidden-scrollbar">
-           <h3 className="text-zinc-500 text-[10px] font-mono tracking-widest uppercase mb-6 flex items-center gap-2">
+           <h3 className="text-zinc-400 text-[10px] font-mono tracking-widest uppercase mb-6 flex items-center gap-2">
              <LayoutGrid size={14} /> Explorador
            </h3>
            
@@ -124,3 +124,4 @@ const ProjectsWindow = ({ constraintsRef }) => {
 };
 
 export default ProjectsWindow;
+

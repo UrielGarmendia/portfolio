@@ -71,10 +71,10 @@ export default function Contact() {
           <form ref={formRef} onSubmit={handleSubmit} className="space-y-8 relative z-10 flex-1 flex flex-col">
              
              <div className="flex flex-col">
-                <label className="font-mono text-[10px] font-bold uppercase tracking-widest mb-3 text-industrial-400">Nombre</label>
+                <label htmlFor="from_name" className="font-mono text-[10px] font-bold uppercase tracking-widest mb-3 text-zinc-400">Nombre</label>
                 <div className="bg-[#0a0a0a] rounded-xl shadow-neu-in border border-black p-1">
                   <input 
-                    type="text" name="from_name" required disabled={isBusy}
+                    id="from_name" type="text" name="from_name" required disabled={isBusy}
                     className="w-full bg-transparent outline-none p-3 font-mono text-sm text-gray-200 placeholder:text-gray-700 disabled:opacity-50"
                     placeholder="Ej. Juan Pérez / Empresa"
                   />
@@ -82,10 +82,10 @@ export default function Contact() {
              </div>
              
              <div className="flex flex-col">
-                <label className="font-mono text-[10px] font-bold uppercase tracking-widest mb-3 text-industrial-400">Email</label>
+                <label htmlFor="reply_to" className="font-mono text-[10px] font-bold uppercase tracking-widest mb-3 text-zinc-400">Email</label>
                 <div className="bg-[#0a0a0a] rounded-xl shadow-neu-in border border-black p-1">
                   <input 
-                    type="email" name="reply_to" required disabled={isBusy}
+                    id="reply_to" type="email" name="reply_to" required disabled={isBusy}
                     className="w-full bg-transparent outline-none p-3 font-mono text-sm text-gray-200 placeholder:text-gray-700 disabled:opacity-50"
                     placeholder="contacto@dominio.com"
                   />
@@ -93,10 +93,10 @@ export default function Contact() {
              </div>
 
              <div className="flex flex-col flex-1">
-                <label className="font-mono text-[10px] font-bold uppercase tracking-widest mb-3 text-industrial-400">Mensaje</label>
+                <label htmlFor="message" className="font-mono text-[10px] font-bold uppercase tracking-widest mb-3 text-zinc-400">Mensaje</label>
                 <div className="bg-[#0a0a0a] rounded-xl shadow-neu-in border border-black p-1 h-32">
                   <textarea 
-                    name="message" required disabled={isBusy}
+                    id="message" name="message" required disabled={isBusy}
                     className="w-full h-full bg-transparent outline-none p-3 font-mono text-sm text-gray-200 placeholder:text-gray-700 resize-none disabled:opacity-50"
                     placeholder="Describe un proyecto o saludo..."
                   />
@@ -108,6 +108,7 @@ export default function Contact() {
                {(status === 'idle' || status === 'sending') && (
                  <button
                    type="submit"
+                   aria-label={status === 'sending' ? 'Enviando mensaje...' : 'Enviar mensaje de contacto'}
                    disabled={status === 'sending'}
                    className="group relative flex items-center justify-center p-4 px-8 font-sans font-bold text-[11px] uppercase tracking-[0.3em] rounded-2xl transition-all duration-300 bg-brushed-metal shadow-neu-out active:shadow-neu-in text-white border border-white/10 select-none cursor-none hover:brightness-110 disabled:opacity-60 disabled:cursor-not-allowed"
                  >

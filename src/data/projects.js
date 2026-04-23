@@ -10,7 +10,7 @@ export const projectsData = [
       'Manejo complejo de estado global y persistencia de datos para asegurar que las tareas, calendarios y recordatorios se mantengan sincronizados sin latencia perceptible.',
     repoUrl:   'https://github.com/UrielGarmendia',
     deployUrl: 'https://mi-planner.netlify.app/',
-    imageUrl:  '/projects/mi-planner.png',
+    imageUrl:  '/projects/mi-planner.webp',
     architecture: [
       { label: 'React UI',         sublabel: 'Context & Hooks', type: 'client' },
       { label: 'State Management', sublabel: 'Local Storage',   type: 'db' }
@@ -29,7 +29,7 @@ export const projectsData = [
     repoUrl:   '',
     deployUrl: '',
     inRedesign: true,
-    imageUrl:  '/projects/fitxperience.png',
+    imageUrl:  '/projects/fitxperience.webp',
     architecture: [
        { label: 'Core Backend', sublabel: 'Node / Express API', type: 'api' },
        { label: 'Relational DB', sublabel: 'Sequelize ORM', type: 'db' },
@@ -47,7 +47,7 @@ export const projectsData = [
       'Modelar un sistema de publicaciones con estados de ciclo de vida (Disponible → Reservado → Vendido) y asegurar consistencia transaccional en la compra usando Sequelize transactions.',
     repoUrl:   'https://github.com/UrielGarmendia',
     deployUrl: 'https://blog-personal-tp2.netlify.app/',
-    imageUrl:  '/projects/cocheando.png',
+    imageUrl:  '/projects/cocheando.webp',
     architecture: [
       { label: 'React Client',   sublabel: 'Vite · Context API',    type: 'client'  },
       { label: 'Express API',    sublabel: 'REST · JWT Middleware',  type: 'api'     },
@@ -66,7 +66,7 @@ export const projectsData = [
       'Renderizar gráficos SVG de datos complejos sin librerías, calculando coordenadas dinámicamente desde arrays de datos crudos usando transformaciones matemáticas puras.',
     repoUrl:   'https://github.com/UrielGarmendia/ONG-Ecofuturo',
     deployUrl: 'https://ong-tp-final.netlify.app/',
-    imageUrl:  '/projects/ecofuturo.png',
+    imageUrl:  '/projects/ecofuturo.webp',
     architecture: [
       { label: 'Vanilla JS',   sublabel: 'DOM API · Events',    type: 'client'  },
       { label: 'SVG Engine',   sublabel: 'Dynamic Coord Calc',  type: 'service' },
@@ -85,7 +85,7 @@ export const projectsData = [
       'Construir un sitio completamente estático y optimizado para SEO sin framework de routing, usando React como motor de renderizado puro con zero dependencias de backend.',
     repoUrl:   'https://github.com/UrielGarmendia/garmendia-cia',
     deployUrl: 'https://garmendiaycia.netlify.app/',
-    imageUrl:  '/projects/garmendiaycia.png',
+    imageUrl:  '/projects/garmendiaycia.webp',
     architecture: [
       { label: 'React SPA',    sublabel: 'Static · No Router',   type: 'client'  },
       { label: 'Netlify CDN',  sublabel: 'Edge Distribution',    type: 'service' },
@@ -103,7 +103,7 @@ export const projectsData = [
       'Implementación de animaciones complejas de UI con Framer Motion, logrando una estética musical vibrante sin pérdida de rendimiento (60fps en mobile).',
     repoUrl:   'https://github.com/UrielGarmendia/identikittv',
     deployUrl: 'https://identikittv.netlify.app/',
-    imageUrl:  '/projects/identikit.png',
+    imageUrl:  '/projects/identikit.webp',
     architecture: [
       { label: 'React SPA',     sublabel: 'Context State',     type: 'client' },
       { label: 'Animation API', sublabel: 'Framer Pipeline',   type: 'service'}
@@ -121,7 +121,7 @@ export const projectsData = [
       'Alcanzar 100/100 en Lighthouse Mobile limitando peticiones HTTP y aprovechando variables CSS nativas para tematización extrema.',
     repoUrl:   'https://github.com/UrielGarmendia/linktree',
     deployUrl: 'https://urielgarmendialinks.netlify.app/',
-    imageUrl:  '/projects/linktree.png',
+    imageUrl:  '/projects/linktree.webp',
     architecture: [
       { label: 'Static HTML',   sublabel: 'DOM Native',    type: 'client' },
       { label: 'CSS Engine',    sublabel: 'Vars Theming',  type: 'client' }

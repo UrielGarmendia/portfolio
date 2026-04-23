@@ -8,7 +8,15 @@
     <title>PORTFOLIO URIEL GARMENDIA</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=JetBrains+Mono:wght@400;500;700&family=Racing+Sans+One&display=swap" rel="stylesheet" />
+    <!-- Fuentes: carga no bloqueante — elimina render-blocking resource -->
+    <link rel="preload" as="style"
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=JetBrains+Mono:wght@400;500;700&family=Racing+Sans+One&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=JetBrains+Mono:wght@400;500;700&family=Racing+Sans+One&display=swap" />
+    </noscript>
+    <!-- Preload imagen LCP (foto de perfil — elemento más grande visible en móvil) -->
+    <link rel="preload" as="image" href="/foto-mia.webp" type="image/webp" fetchpriority="high" />
   </head>
   <body>
     <div id="root"></div>

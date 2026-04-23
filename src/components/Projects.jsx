@@ -32,7 +32,7 @@ const Projects = forwardRef((props, ref) => {
       <div className="max-w-4xl w-full flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
         
         <div className="w-full lg:w-[300px] flex flex-col p-5 md:p-5 rounded-[2rem] bg-[#18181a] shadow-[12px_12px_24px_#0d0d0f,-12px_-12px_24px_#232325] border border-white/5 shrink-0">
-           <h3 className="text-zinc-500 text-xs font-mono tracking-widest uppercase mb-6 px-2 flex items-center gap-2">
+           <h3 className="text-zinc-400 text-xs font-mono tracking-widest uppercase mb-6 px-2 flex items-center gap-2">
              <LayoutGrid size={14} /> Explorador
            </h3>
            
@@ -162,3 +162,4 @@ const Projects = forwardRef((props, ref) => {
 
 Projects.displayName = 'Projects';
 export default Projects;
+

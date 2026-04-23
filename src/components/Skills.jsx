@@ -44,8 +44,8 @@ export default function Skills() {
                 <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[#050505] to-transparent z-10 pointer-events-none" />
                 <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[#050505] to-transparent z-10 pointer-events-none" />
                 
-                <div className="flex animate-marquee">
-                   {[...allSkills, ...allSkills, ...allSkills, ...allSkills].map((obj, idx) => (
+                <div className="flex animate-marquee" aria-hidden="true">
+                   {[...allSkills, ...allSkills].map((obj, idx) => (
                       <span key={idx} className="flex items-center gap-3 mx-8 font-mono font-bold text-sm tracking-widest uppercase" style={{ color: obj.color }}>
                         <span className="opacity-70">{obj.icon}</span>
                         <span className="text-industrial-300">{obj.item}</span>

@@ -1,0 +1,82 @@
+// netlify.toml — Configuración de deployment, headers de seguridad y caché
+// Portfolio de Uriel Garmendia
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# ─── Optimización de assets en build ──────────────────────────────────────────
+[build.processing]
+  skip_processing = false
+
+[build.processing.css]
+  bundle = true
+  minify = true
+
+[build.processing.js]
+  bundle = false
+  minify = true
+
+[build.processing.images]
+  compress = true
+
+# ─── Headers de seguridad globales ────────────────────────────────────────────
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Previene clickjacking (reemplaza X-Frame-Options en browsers modernos)
+    X-Frame-Options = "DENY"
+
+    # Previene MIME sniffing — evita que el browser ejecute JS disfrazado de imagen
+    X-Content-Type-Options = "nosniff"
+
+    # Cross-Origin Opener Policy — aísla el contexto de navegación
+    Cross-Origin-Opener-Policy = "same-origin"
+
+    # Referrer Policy — no filtra la URL de origen a sitios externos
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+    # Permissions Policy — deshabilitar APIs sensibles no utilizadas
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=()"
+
+    # ── CSP en modo report-only ────────────────────────────────────────────────
+    # Comenzar en report-only para detectar violaciones sin romper nada.
+    # Una vez validado, cambiar a Content-Security-Policy.
+    Content-Security-Policy-Report-Only = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://api.emailjs.com; frame-src 'none'; object-src 'none'; base-uri 'self';"
+
+# ─── Cache de largo plazo para assets con hash de Vite ────────────────────────
+# Vite genera nombres de archivo con hash (ej: index-DpVDC1Ms.js)
+# → se pueden cachear por 1 año sin riesgo de stale cache
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Cache para imágenes del directorio raíz
+[[headers]]
+  for = "/*.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Cache del PDF del CV
+[[headers]]
+  for = "/*.pdf"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+    Content-Disposition = "attachment"
+
+# ─── SPA fallback — necesario para React Router / rutas del lado cliente ──────
+[[redirects]]
+  from = "/*"
+  to   = "/index.html"
+  status = 200
