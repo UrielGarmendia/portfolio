@@ -63,12 +63,6 @@
     Cache-Control = "public, max-age=86400"
     Content-Disposition = "attachment"
 
-# Servir robots.txt directamente (no redirigir al SPA)
-[[redirects]]
-  from = "/robots.txt"
-  to   = "/robots.txt"
-  status = 200
-
 # SPA fallback — necesario para React Router / rutas del lado cliente
 [[redirects]]
   from = "/*"
