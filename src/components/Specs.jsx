@@ -20,8 +20,8 @@ export default function Specs() {
               <img
                 src="/foto-mia.webp"
                 alt="Fotografía de Uriel Garmendia, desarrollador Full Stack"
-                width={280}
-                height={373}
+                width={400}
+                height={549}
                 loading="eager"
                 decoding="sync"
                 fetchPriority="high"

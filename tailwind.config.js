@@ -20,7 +20,7 @@ export default {
           100: '#e5e5e5', // Whitish glare
         },
         software: {
-          blue: '#0078D7',     // WinOLS selection blue
+          blue: '#339AF0',     // Accessible blue (6.05:1 ratio vs #18181a)
           panel: '#2D2D30',    // Studio dark panel
           border: '#3E3E42',   // Studio border
         },
