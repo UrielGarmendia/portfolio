@@ -1,5 +1,5 @@
-// netlify.toml — Configuración de deployment, headers de seguridad y caché
-// Portfolio de Uriel Garmendia
+# netlify.toml — Configuración de deployment, headers de seguridad y caché
+# Portfolio de Uriel Garmendia
 
 [build]
   command = "npm run build"
@@ -39,10 +39,8 @@
     # Permissions Policy — deshabilitar APIs sensibles no utilizadas
     Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=()"
 
-    # ── CSP en modo report-only ────────────────────────────────────────────────
-    # Comenzar en report-only para detectar violaciones sin romper nada.
-    # Una vez validado, cambiar a Content-Security-Policy.
-    Content-Security-Policy-Report-Only = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://api.emailjs.com; frame-src 'none'; object-src 'none'; base-uri 'self';"
+    # ── CSP enforced ───────────────────────────────────────────────────────
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://api.emailjs.com; frame-src 'none'; object-src 'none'; base-uri 'self'; require-trusted-types-for 'script';"
 
 # ─── Cache de largo plazo para assets con hash de Vite ────────────────────────
 # Vite genera nombres de archivo con hash (ej: index-DpVDC1Ms.js)

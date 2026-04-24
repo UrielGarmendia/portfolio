@@ -1,6 +1,5 @@
 import DraggableWindow from '../os/DraggableWindow';
 import { WINDOW_IDS } from '../../store/useSystemStore';
-import OptimizedImage from '../ui/OptimizedImage';
 
 const AboutWindow = ({ constraintsRef }) => (
   <DraggableWindow
@@ -16,13 +15,13 @@ const AboutWindow = ({ constraintsRef }) => (
       <div className="relative flex-shrink-0">
         <div className="bg-[#121212] p-4 shadow-neu-out rounded-3xl border border-white/5 relative w-56 md:w-[240px] aspect-[3/4] flex flex-col items-center justify-center">
           <div className="relative w-full h-full rounded-2xl bg-[#0a0a0a]">
-            <OptimizedImage
-              src="/foto-mia.png"
+            <img
+              src="/foto-mia.webp"
               alt="Fotografía de Uriel Garmendia, desarrollador Full Stack"
               width={240}
               height={320}
-              priority={false}
-              sizes="240px"
+              loading="lazy"
+              decoding="async"
               className="absolute inset-0 w-full h-full object-cover object-top rounded-2xl"
               style={{ transform: 'translateZ(0)', WebkitTransform: 'translateZ(0)', backfaceVisibility: 'hidden' }}
             />

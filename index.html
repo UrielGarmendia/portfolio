@@ -2,41 +2,19 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/logo-terminal.png" />
+    <link rel="icon" type="image/svg+xml" href="/logo-terminal.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Uriel Garmendia - Desarrollador Fullstack. Portfolio interactivo con estética de telemetría de carreras." />
     <title>PORTFOLIO URIEL GARMENDIA</title>
-
-    <!-- Critical CSS inline: el h1 LCP usa sistema de fuentes hasta que Oswald cargue.
-         Esto permite que el navegador pinte el texto en el PRIMER frame. -->
-    <style>
-      /* Fallback instantáneo para el h1 LCP — no espera ninguna red */
-      .font-display {
-        font-family: 'Oswald', 'Arial Narrow', Arial, sans-serif;
-      }
-      /* Evitar FOUC del body mientras carga React */
-      html { background-color: #121212; }
-      body { background-color: #080808; margin: 0; }
-    </style>
-
-    <!-- Preconnect a Google Fonts (DNS + TLS en paralelo) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-    <!-- Subset crítico de Oswald: solo los caracteres del h1 "URIEL GARMENDIA"
-         Esto descarga ~3 KB en lugar de ~80 KB — se precargar con alta prioridad -->
-    <link rel="preload" as="style"
-      href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&text=URIELGAMNDO&display=swap"
-      onload="this.onload=null;this.rel='stylesheet'" />
-
-    <!-- Resto de fuentes: carga no bloqueante — JetBrains Mono + Racing Sans One -->
-    <link rel="preload" as="style"
+    <!-- Fuentes: carga no bloqueante con media=print → onload=all -->
+    <link rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=JetBrains+Mono:wght@400;500;700&family=Racing+Sans+One&display=swap"
-      onload="this.onload=null;this.rel='stylesheet'" />
+      media="print" onload="this.media='all'" />
     <noscript>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=JetBrains+Mono:wght@400;500;700&family=Racing+Sans+One&display=swap" />
     </noscript>
-
     <!-- Preload imagen LCP (foto de perfil — elemento más grande visible en móvil) -->
     <link rel="preload" as="image" href="/foto-mia.webp" type="image/webp" fetchpriority="high" />
   </head>

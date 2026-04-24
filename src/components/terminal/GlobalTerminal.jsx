@@ -495,8 +495,8 @@ const GlobalTerminal = () => {
             e.stopPropagation();
             if (!isTerminalOpen) toggleTerminal();
           }}
-          aria-label="Entrada de comandos de la terminal"
           placeholder={isTerminalOpen ? "escribí un comando — o tirá 'help' para ver qué onda" : ''}
+          aria-label="Terminal de comandos"
           spellCheck={false}
           autoComplete="off"
           autoCorrect="off"
@@ -529,7 +529,6 @@ const GlobalTerminal = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
-            aria-label="Ejecutar comando"
             onClick={(e) => { e.stopPropagation(); handleExecute(); }}
             style={{
               background:    'rgba(255,0,127,0.12)',

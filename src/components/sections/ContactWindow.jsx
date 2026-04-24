@@ -51,8 +51,7 @@ const ContactWindow = ({ constraintsRef }) => {
       height="650px"
     >
       <div className="relative bg-[#121212] w-full h-full rounded-2xl shadow-neu-out border border-white/5 p-8 flex flex-col min-h-[500px]">
-        {/* Decorativo: gradiente sutil, sin data-URL problemática */}
-        <div className="absolute inset-0 rounded-2xl pointer-events-none" style={{ background: 'radial-gradient(ellipse at bottom left, rgba(0,120,255,0.04) 0%, transparent 60%)' }} />
+        <div className="absolute inset-0 bg-blueprint-engine bg-no-repeat bg-[bottom_left_-4rem] opacity-[0.02] pointer-events-none rounded-2xl" />
 
         <div className="border-b-2 border-[#181818] pb-4 mb-8 flex justify-between items-end relative z-10">
            <div>
