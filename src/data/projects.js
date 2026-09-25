@@ -40,7 +40,7 @@ export const projectsData = [
     id:    'cocheando',
     title: 'Cocheando',
     role:  'Full Stack Developer',
-    techStack: ['React', 'Node.js', 'Express', 'MySQL', 'Sequelize', 'JWT'],
+    techStack: ['React'],
     simpleDesc:
       'Blog del mundo de los autos con artículos creados con información real. Proyecto académico UADE.',
     academicChallenge:
@@ -50,8 +50,6 @@ export const projectsData = [
     imageUrl:  '/projects/cocheando.webp',
     architecture: [
       { label: 'React Client',   sublabel: 'Vite · Context API',    type: 'client'  },
-      { label: 'Express API',    sublabel: 'REST · JWT Middleware',  type: 'api'     },
-      { label: 'Database',       sublabel: 'MySQL · Relacional',     type: 'db'      },
     ],
     dataFlow: '[Client React] <--(JSON)--> [Node/Express API] <--(Query)--> [Database]',
   },
