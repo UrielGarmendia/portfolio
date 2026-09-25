@@ -42,10 +42,10 @@ export const projectsData = [
     role:  'Full Stack Developer',
     techStack: ['React', 'Node.js', 'Express', 'MySQL', 'Sequelize', 'JWT'],
     simpleDesc:
-      'Plataforma de compra-venta de autos con autenticación JWT, roles de usuario, y panel de administración. Proyecto académico UADE.',
+      'Blog del mundo de los autos con artículos creados con información real. Proyecto académico UADE.',
     academicChallenge:
-      'Modelar un sistema de publicaciones con estados de ciclo de vida (Disponible → Reservado → Vendido) y asegurar consistencia transaccional en la compra usando Sequelize transactions.',
-    repoUrl:   'https://github.com/UrielGarmendia',
+      'Modelar una página con Cards de diferentes artículos con imagenes para complementar la información.',
+    repoUrl:   'https://github.com/UrielGarmendia/blog-personal.git',
     deployUrl: 'https://blog-personal-tp2.netlify.app/',
     imageUrl:  '/projects/cocheando.webp',
     architecture: [
