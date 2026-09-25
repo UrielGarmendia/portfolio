@@ -3,12 +3,12 @@ export const projectsData = [
     id:    'mi-planner',
     title: 'Mi Planner',
     role:  'Full Stack Developer',
-    techStack: ['React', 'JavaScript', 'CSS', 'Node.js'],
+    techStack: ['React', 'JavaScript', 'CSS'],
     simpleDesc:
       'Herramienta de organización personal y gestión de tareas estructurada para maximizar la productividad.',
     academicChallenge:
       'Manejo complejo de estado global y persistencia de datos para asegurar que las tareas, calendarios y recordatorios se mantengan sincronizados sin latencia perceptible.',
-    repoUrl:   'https://github.com/UrielGarmendia',
+    repoUrl:   'https://github.com/UrielGarmendia/proyecto-de-gestion-testing.git',
     deployUrl: 'https://mi-planner.netlify.app/',
     imageUrl:  '/projects/mi-planner.webp',
     architecture: [
